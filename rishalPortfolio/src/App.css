@@ -1,0 +1,5 @@
+/* App.css - minimal, index.css handles globals */
+.app {
+  min-height: 100vh;
+  background: var(--bg);
+}
