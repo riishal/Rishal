@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Moon, Sun, Menu, X, Mail } from "lucide-react";
+import { Moon, Sun, Menu, X } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 
 const LINKS = ["Home", "About", "Services", "Works", "Contact"];
@@ -36,112 +36,110 @@ export default function Navbar() {
             <nav style={{
                 position: "fixed", top: 0, left: 0, right: 0, zIndex: 999, height: 60,
                 display: "flex", alignItems: "center", justifyContent: "space-between",
-                padding: "0 clamp(20px, 6vw, 96px)",
+                padding: "0 clamp(20px, 5vw, 80px)",
                 background: scrolled ? t.navBg : "transparent",
-                backdropFilter: scrolled ? "blur(24px)" : "none",
-                WebkitBackdropFilter: scrolled ? "blur(24px)" : "none",
+                backdropFilter: scrolled ? "blur(20px)" : "none",
+                WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",
                 borderBottom: scrolled ? `1px solid ${t.border}` : "none",
-                transition: "background 0.35s, border 0.35s",
+                transition: "background 0.35s, border 0.35s, backdrop-filter 0.35s",
             }}>
                 {/* Logo */}
                 <button onClick={() => go("Home")} style={{
                     background: "none", border: "none", cursor: "pointer",
-                    display: "flex", alignItems: "center", gap: 6,
-                    fontFamily: "'Outfit', sans-serif", fontSize: 17, fontWeight: 700,
-                    color: t.text, letterSpacing: "-0.3px",
+                    fontFamily: "'Syne', sans-serif", fontSize: 20, fontWeight: 800,
+                    color: t.text, letterSpacing: "-0.5px",
+                    display: "flex", alignItems: "center", gap: 2,
                 }}>
-                    <span style={{
-                        width: 28, height: 28, borderRadius: 8,
-                        background: t.accent, display: "flex", alignItems: "center", justifyContent: "center",
-                        fontSize: 13, fontWeight: 800, color: "#fff",
-                    }}>R</span>
-                    ishal
+                    R<span style={{ color: t.accent }}>.</span>
                 </button>
 
                 {/* Desktop links */}
-                <div className="nav-links" style={{ display: "flex", gap: 4, alignItems: "center" }}>
+                <div className="nav-links" style={{ display: "flex", gap: 2, alignItems: "center" }}>
                     {LINKS.map(l => <NavLink key={l} l={l} active={active === l} t={t} onClick={() => go(l)} />)}
                 </div>
 
-                {/* Right controls */}
+                {/* Controls */}
                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    {/* Theme toggle */}
-                    <button onClick={toggle} aria-label="Toggle theme" style={{
-                        width: 48, height: 26, borderRadius: 26, padding: "3px",
+                    <button onClick={toggle} aria-label="toggle theme" style={{
+                        width: 36, height: 36, borderRadius: "50%",
                         background: t.bg3, border: `1px solid ${t.border2}`,
-                        cursor: "pointer", transition: "all 0.3s",
-                        display: "flex", alignItems: "center", position: "relative",
-                    }}>
-                        <div style={{
-                            width: 18, height: 18, borderRadius: "50%", background: t.accent,
-                            display: "flex", alignItems: "center", justifyContent: "center",
-                            transform: isDark ? "translateX(0)" : "translateX(20px)",
-                            transition: "transform 0.3s cubic-bezier(0.4,0,0.2,1)",
-                        }}>
-                            {isDark
-                                ? <Moon size={10} color="#fff" strokeWidth={2.5} />
-                                : <Sun size={10} color="#fff" strokeWidth={2.5} />
-                            }
-                        </div>
+                        cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
+                        transition: "all 0.2s",
+                    }}
+                        onMouseEnter={e => { e.currentTarget.style.borderColor = t.accentBorder; }}
+                        onMouseLeave={e => { e.currentTarget.style.borderColor = t.border2; }}
+                    >
+                        {isDark
+                            ? <Moon size={14} color={t.text3} strokeWidth={2} />
+                            : <Sun size={14} color={t.text3} strokeWidth={2} />
+                        }
                     </button>
 
-                    {/* Hire Me — desktop */}
                     <button
-                        className="hire-btn-desktop"
+                        className="hire-btn"
                         onClick={() => window.open("mailto:riishaltt@gmail.com")}
                         style={{
                             background: t.accent, color: "#fff",
-                            border: "none", borderRadius: 8, padding: "8px 16px",
-                            fontSize: 13, fontWeight: 600, cursor: "pointer",
-                            display: "flex", alignItems: "center", gap: 5,
-                            fontFamily: "'Outfit', sans-serif",
-                            transition: "all 0.2s",
+                            border: "none", borderRadius: 6, padding: "8px 16px",
+                            fontSize: 12.5, fontWeight: 700, cursor: "pointer",
+                            fontFamily: "'Syne', sans-serif", letterSpacing: "0.5px",
+                            textTransform: "uppercase", transition: "all 0.2s",
                         }}
                         onMouseEnter={e => { e.currentTarget.style.background = t.accentHover; e.currentTarget.style.transform = "translateY(-1px)"; }}
                         onMouseLeave={e => { e.currentTarget.style.background = t.accent; e.currentTarget.style.transform = "none"; }}
-                    >
-                        <Mail size={13} strokeWidth={2.5} />
-                        Hire Me
-                    </button>
+                    >Hire Me</button>
 
-                    {/* Hamburger */}
                     <button
                         className="hamburger"
                         onClick={() => setOpen(o => !o)}
-                        style={{ display: "none", background: "none", border: "none", cursor: "pointer", padding: 4 }}
+                        style={{ display: "none", background: "none", border: "none", cursor: "pointer", padding: 4, color: t.text }}
                     >
                         {open ? <X size={20} color={t.text} /> : <Menu size={20} color={t.text} />}
                     </button>
                 </div>
             </nav>
 
-            {/* Mobile drawer */}
+            {/* Mobile menu */}
             {open && (
                 <div style={{
                     position: "fixed", top: 60, left: 0, right: 0, zIndex: 998,
                     background: t.bg2, borderBottom: `1px solid ${t.border}`,
-                    padding: "12px 20px 20px",
-                    display: "flex", flexDirection: "column", gap: 4,
+                    padding: "16px 20px 20px",
+                    display: "flex", flexDirection: "column", gap: 3,
+                    animation: "slideDown 0.22s ease",
                 }}>
                     {LINKS.map(l => (
                         <button key={l} onClick={() => go(l)} style={{
                             background: active === l ? t.accentBg : "none",
                             border: `1px solid ${active === l ? t.accentBorder : "transparent"}`,
-                            fontSize: 15, fontWeight: 500, color: active === l ? t.accent : t.text2,
-                            textAlign: "left", padding: "11px 14px", borderRadius: 8,
-                            fontFamily: "'Outfit', sans-serif", transition: "all 0.2s", cursor: "pointer",
+                            fontSize: 14, fontWeight: 600, color: active === l ? t.accent : t.text2,
+                            textAlign: "left", padding: "12px 14px", borderRadius: 6,
+                            fontFamily: "'Syne', sans-serif", transition: "all 0.18s", cursor: "pointer",
                         }}>{l}</button>
                     ))}
                     <button
                         onClick={() => window.open("mailto:riishaltt@gmail.com")}
                         style={{
                             background: t.accent, color: "#fff", border: "none",
-                            borderRadius: 8, padding: "11px 14px", fontSize: 14, fontWeight: 600,
-                            marginTop: 8, cursor: "pointer", fontFamily: "'Outfit', sans-serif",
+                            borderRadius: 6, padding: "12px 14px", fontSize: 13, fontWeight: 700,
+                            marginTop: 8, cursor: "pointer", fontFamily: "'Syne', sans-serif",
+                            letterSpacing: "0.5px", textTransform: "uppercase",
                         }}
                     >Hire Me</button>
                 </div>
             )}
+
+            <style>{`
+        @keyframes slideDown {
+          from { opacity: 0; transform: translateY(-8px); }
+          to   { opacity: 1; transform: none; }
+        }
+        @media (max-width: 768px) {
+          .nav-links { display: none !important; }
+          .hire-btn  { display: none !important; }
+          .hamburger { display: flex !important; }
+        }
+      `}</style>
         </>
     );
 }
@@ -149,20 +147,28 @@ export default function Navbar() {
 function NavLink({ l, active, t, onClick }) {
     const [h, setH] = useState(false);
     return (
-        <button
-            onClick={onClick}
-            onMouseEnter={() => setH(true)}
-            onMouseLeave={() => setH(false)}
+        <button onClick={onClick}
+            onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
             style={{
-                background: active ? t.accentBg : h ? t.border : "none",
-                border: "none", cursor: "pointer",
-                fontSize: 13.5, fontWeight: 500,
+                background: "none", border: "none", cursor: "pointer",
+                fontSize: 13, fontWeight: active ? 700 : 500,
                 color: active ? t.accent : h ? t.text : t.text2,
-                fontFamily: "'Outfit', sans-serif",
-                padding: "6px 12px", borderRadius: 6, transition: "all 0.18s",
+                fontFamily: "'Syne', sans-serif",
+                padding: "6px 13px", borderRadius: 5,
+                transition: "color 0.18s",
+                position: "relative",
+                letterSpacing: active ? "0.3px" : 0,
             }}
         >
             {l}
+            {active && (
+                <span style={{
+                    position: "absolute", bottom: 2, left: "50%",
+                    transform: "translateX(-50%)",
+                    width: 3, height: 3, borderRadius: "50%",
+                    background: t.accent, display: "block",
+                }} />
+            )}
         </button>
     );
 }

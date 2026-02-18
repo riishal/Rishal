@@ -13,24 +13,20 @@ export default function Footer() {
     return (
         <footer style={{
             borderTop: `1px solid ${t.border}`,
-            padding: "20px clamp(20px, 6vw, 96px)",
+            padding: "20px clamp(24px, 6vw, 96px)",
             background: t.bg,
             display: "flex", justifyContent: "space-between",
             alignItems: "center", flexWrap: "wrap", gap: 12,
         }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                <span style={{
-                    width: 26, height: 26, borderRadius: 7,
-                    background: t.accent, display: "inline-flex", alignItems: "center", justifyContent: "center",
-                    fontSize: 12, fontWeight: 800, color: "#fff", fontFamily: "'Outfit', sans-serif",
-                }}>R</span>
-                <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 15, fontWeight: 700, color: t.text }}>
-                    ishal
-                </span>
+            <div style={{
+                fontFamily: "'Syne', sans-serif", fontSize: 18, fontWeight: 800,
+                color: t.text, letterSpacing: "-0.5px",
+            }}>
+                R<span style={{ color: t.accent }}>.</span>
             </div>
 
-            <div style={{ fontSize: 11.5, color: t.text3, fontFamily: "'Outfit', sans-serif" }}>
-                © 2025 Rishal · Flutter Developer · Kerala, India
+            <div style={{ fontSize: 11.5, color: t.text3, fontFamily: "'Syne', sans-serif" }}>
+                © 2025 Rishal · Flutter Developer · Kerala
             </div>
 
             <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
@@ -51,7 +47,7 @@ function FootLink({ Icon, label, url, t }) {
                 display: "flex", alignItems: "center", gap: 5,
                 fontSize: 12, color: h ? t.accent : t.text3,
                 transition: "color 0.18s", textDecoration: "none",
-                fontFamily: "'Outfit', sans-serif",
+                fontFamily: "'Syne', sans-serif",
             }}>
             <Icon size={13} strokeWidth={2} color={h ? t.accent : t.text3} style={{ transition: "color 0.18s" }} />
             {label}

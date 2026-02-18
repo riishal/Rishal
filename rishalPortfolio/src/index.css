@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
 
 /* ── Reset ─────────────────────────────── */
 *,
@@ -15,15 +15,15 @@ html {
 }
 
 body {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Syne', sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ── Scrollbar ──────────────────────────── */
+/* ── Scrollbar ── */
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 3px;
 }
 
 ::-webkit-scrollbar-track {
@@ -32,16 +32,16 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: #22C55E;
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
-/* ── Selection ──────────────────────────── */
+/* ── Selection ── */
 ::selection {
   background: #22C55E;
   color: #fff;
 }
 
-/* ── Base ──────────────────────────── */
+/* ── Base ── */
 a {
   text-decoration: none;
 }
@@ -63,38 +63,14 @@ img {
 
 input::placeholder,
 textarea::placeholder {
-  color: rgba(138, 154, 138, 0.45);
+  color: rgba(120, 120, 100, 0.4);
 }
 
-/* ── Animations ─────────────────────────── */
-@keyframes fadeInUp {
+/* ── Keyframes ── */
+@keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(24px);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-24px);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(24px);
+    transform: translateY(26px);
   }
 
   to {
@@ -125,17 +101,184 @@ textarea::placeholder {
   }
 }
 
-/* ── Responsive nav ─────────────────────── */
+/* ── Nav responsive ── */
 @media (max-width: 768px) {
   .nav-links {
     display: none !important;
   }
 
-  .hire-btn-desktop {
+  .hire-btn {
     display: none !important;
   }
 
   .hamburger {
     display: flex !important;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   HOME — mobile + tablet
+═══════════════════════════════════════════ */
+
+/* Tablet portrait (681px – 900px): keep side-by-side but tighten */
+@media (max-width: 900px) and (min-width: 681px) {
+  .home-left {
+    flex: 0 0 52% !important;
+    padding: 100px 24px 60px !important;
+  }
+
+  .home-portrait-desktop {
+    flex: 0 0 48% !important;
+  }
+}
+
+/* Mobile (≤680px): stack vertically – PHOTO ON TOP */
+@media (max-width: 680px) {
+
+  /* Force column stacking */
+  .home-desktop {
+    flex-direction: column !important;
+    min-height: unset !important;
+  }
+
+  /* Portrait: full-width, fixed tall height so the face + upper body shows */
+  .home-portrait-desktop {
+    flex: none !important;
+    order: 0 !important;
+    width: 100% !important;
+    /* Tall enough to show face + shoulders + torso nicely */
+    height: 95vw !important;
+    min-height: 300px !important;
+    max-height: 480px !important;
+    /* Override min-height:100vh from desktop */
+    min-height: 300px !important;
+  }
+
+  /* Keep image centred on face */
+  .home-portrait-desktop img {
+    object-position: center 5% !important;
+  }
+
+  /* Left-edge fade not needed in stacked layout – replace with bottom fade only */
+  .home-portrait-desktop .left-fade {
+    background: transparent !important;
+  }
+
+  /* Text content below photo */
+  .home-left {
+    flex: none !important;
+    order: 1 !important;
+    width: 100% !important;
+    padding: 32px 20px 52px !important;
+  }
+
+  /* Name scales down nicely on narrow phones */
+  .home-left h1 {
+    font-size: clamp(52px, 15vw, 80px) !important;
+  }
+
+  /* Stack CTA buttons vertically, full width */
+  .home-ctas {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  .home-ctas button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Stats: 2-column grid */
+  .stats-row {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px !important;
+  }
+
+  /* Hide scroll cue on mobile */
+  #home>div[style*="bottom: 28"] {
+    display: none !important;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 380px) {
+  .home-portrait-desktop {
+    height: 110vw !important;
+    max-height: 420px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   ABOUT — mobile
+═══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .about-grid {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .about-photo-col {
+    width: 100% !important;
+    max-width: 240px !important;
+  }
+
+  .about-bio-col {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   SERVICES — mobile
+═══════════════════════════════════════════ */
+@media (max-width: 580px) {
+  .services-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   WORKS — mobile
+═══════════════════════════════════════════ */
+@media (max-width: 1000px) {
+  .works-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 540px) {
+  .works-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .modal-details {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .side-phone {
+    display: none !important;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   CONTACT — mobile
+═══════════════════════════════════════════ */
+@media (max-width: 560px) {
+  .form-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  .contact-layout {
+    flex-direction: column !important;
   }
 }

@@ -11,8 +11,7 @@ export default function App() {
   const { t } = useTheme();
   return (
     <div style={{
-      background: t.bg,
-      color: t.text,
+      background: t.bg, color: t.text,
       minHeight: "100vh",
       transition: "background 0.3s, color 0.3s",
     }}>

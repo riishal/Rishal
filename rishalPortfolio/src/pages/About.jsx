@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {
     Rocket, Laptop, Code2, GraduationCap,
-    Download, ExternalLink, Award, BookOpen, ChevronRight,
+    Download, ExternalLink, ChevronRight,
 } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import { useInView } from "../hooks/useInView";
@@ -24,9 +24,9 @@ const EXP = [
         pts: [
             "Built ECSO Logistics App — live on Google Play Store",
             "Developed Inspec QC & production monitoring application",
-            "Implemented role-based access control with JWT auth",
-            "Invoice booking with PDF generation & real-time tracking",
-            "40% faster load times via performance optimization",
+            "Role-based access control with JWT authentication",
+            "PDF invoice generation & real-time WebSocket tracking",
+            "40% load time improvement via performance optimization",
         ],
     },
     {
@@ -72,43 +72,66 @@ export default function About() {
     return (
         <section id="about" ref={ref} style={{
             background: t.bg,
-            padding: "96px clamp(20px, 6vw, 96px)",
+            padding: "96px clamp(24px, 6vw, 96px)",
+            borderTop: `1px solid ${t.border}`,
         }}>
             <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-                {/* Section label */}
-                <SectionLabel label="About Me" t={t} vis={vis} />
 
-                {/* Profile grid */}
+                {/* Section eyebrow */}
+                <Eyebrow label="About Me" t={t} vis={vis} />
+
+                {/* Profile row */}
                 <div className="about-grid" style={{
-                    display: "flex", gap: "clamp(24px, 6vw, 64px)",
-                    alignItems: "flex-start", marginBottom: 72, flexWrap: "wrap",
-                    opacity: vis ? 1 : 0,
-                    transform: vis ? "none" : "translateY(20px)",
-                    transition: "opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s",
+                    display: "flex", gap: "clamp(28px, 6vw, 72px)",
+                    alignItems: "flex-start", marginBottom: 80, flexWrap: "wrap",
                 }}>
-                    {/* Photo */}
-                    <div className="about-photo-col" style={{ flex: "0 0 auto", width: "clamp(160px, 18vw, 220px)" }}>
+                    {/* Photo — rectangular, no border-radius */}
+                    <div className="about-photo-col" style={{
+                        flex: "0 0 auto",
+                        width: "clamp(160px, 18vw, 240px)",
+                        opacity: vis ? 1 : 0,
+                        transform: vis ? "none" : "translateX(-24px)",
+                        transition: "opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s",
+                    }}>
                         <div style={{
-                            borderRadius: 16, overflow: "hidden",
-                            border: `1px solid ${t.border2}`, boxShadow: t.shadowLg,
-                        }}>
+                            position: "relative", overflow: "hidden",
+                            borderRadius: 4,  /* very subtle, almost square */
+                        }}
+                            onMouseEnter={e => { e.currentTarget.querySelector("img").style.transform = "scale(1.04)"; }}
+                            onMouseLeave={e => { e.currentTarget.querySelector("img").style.transform = "scale(1)"; }}
+                        >
                             <img src={aboutImg} alt="Rishal" style={{
                                 width: "100%", height: "auto", display: "block",
+                                transition: "transform 0.5s cubic-bezier(0.16,1,0.3,1)",
+                            }} />
+                            {/* bottom gradient overlay */}
+                            <div style={{
+                                position: "absolute", bottom: 0, left: 0, right: 0, height: "30%",
+                                background: `linear-gradient(to top, ${t.bg} 0%, transparent 100%)`,
+                                pointerEvents: "none",
                             }} />
                         </div>
-                        {/* Quick facts */}
-                        <div style={{ display: "flex", flexDirection: "column", gap: 7, marginTop: 12 }}>
-                            {[
-                                { text: "3 Apps on Play Store" },
-                                { text: "BSc Computer Science" },
-                                { text: "Kerala, India" },
-                            ].map(({ text }) => (
+
+                        {/* Simple fact pills */}
+                        <div style={{ display: "flex", flexDirection: "column", gap: 6, marginTop: 14 }}>
+                            {["3 Apps on Play Store", "BSc Computer Science", "Kerala, India"].map(text => (
                                 <div key={text} style={{
                                     display: "flex", alignItems: "center", gap: 8,
-                                    padding: "8px 11px", background: t.bgCard,
-                                    border: `1px solid ${t.border}`, borderRadius: 7,
-                                }}>
-                                    <div style={{ width: 5, height: 5, borderRadius: "50%", background: t.accent, flexShrink: 0 }} />
+                                    padding: "7px 11px", background: t.bgCard,
+                                    border: `1px solid ${t.border}`, borderRadius: 6,
+                                    transition: "border-color 0.2s, transform 0.2s",
+                                    cursor: "default",
+                                }}
+                                    onMouseEnter={e => {
+                                        e.currentTarget.style.borderColor = t.accentBorder;
+                                        e.currentTarget.style.transform = "translateX(4px)";
+                                    }}
+                                    onMouseLeave={e => {
+                                        e.currentTarget.style.borderColor = t.border;
+                                        e.currentTarget.style.transform = "none";
+                                    }}
+                                >
+                                    <div style={{ width: 4, height: 4, borderRadius: "50%", background: t.accent, flexShrink: 0 }} />
                                     <span style={{ color: t.text2, fontSize: 12, fontWeight: 500 }}>{text}</span>
                                 </div>
                             ))}
@@ -116,87 +139,57 @@ export default function About() {
                     </div>
 
                     {/* Bio */}
-                    <div className="about-bio-col" style={{ flex: 1, minWidth: "min(100%, 280px)" }}>
+                    <div className="about-bio-col" style={{
+                        flex: 1, minWidth: "min(100%, 280px)",
+                        opacity: vis ? 1 : 0,
+                        transform: vis ? "none" : "translateY(24px)",
+                        transition: "opacity 0.7s ease 0.18s, transform 0.7s ease 0.18s",
+                    }}>
                         <h2 style={{
-                            fontFamily: "'Outfit', sans-serif",
-                            fontSize: "clamp(28px, 5vw, 44px)", fontWeight: 800,
-                            letterSpacing: "-0.02em", lineHeight: 1.1,
+                            fontFamily: "'Syne', sans-serif",
+                            fontSize: "clamp(28px, 5vw, 46px)", fontWeight: 800,
+                            letterSpacing: "-0.03em", lineHeight: 1.05,
                             color: t.text, marginBottom: 6,
                         }}>Building apps</h2>
                         <h2 style={{
-                            fontFamily: "'Outfit', sans-serif",
-                            fontSize: "clamp(28px, 5vw, 44px)", fontWeight: 800,
-                            letterSpacing: "-0.02em", lineHeight: 1.1,
-                            color: t.accent, marginBottom: 20,
-                        }}>people love to use</h2>
+                            fontFamily: "'Syne', sans-serif",
+                            fontSize: "clamp(28px, 5vw, 46px)", fontWeight: 800,
+                            letterSpacing: "-0.03em", lineHeight: 1.05,
+                            color: t.accent, marginBottom: 22,
+                        }}>people love to use.</h2>
 
-                        <p style={{ color: t.text2, fontSize: "clamp(14px, 1.6vw, 15px)", lineHeight: 1.75, marginBottom: 12 }}>
+                        <p style={{ color: t.text2, fontSize: "clamp(13.5px, 1.5vw, 15px)", lineHeight: 1.82, marginBottom: 14 }}>
                             Flutter Developer with <strong style={{ color: t.text }}>3+ years of hands-on experience</strong> building
                             high-performance cross-platform mobile and web applications.
                         </p>
-                        <p style={{ color: t.text2, fontSize: "clamp(14px, 1.6vw, 15px)", lineHeight: 1.75, marginBottom: 28 }}>
+                        <p style={{ color: t.text2, fontSize: "clamp(13.5px, 1.5vw, 15px)", lineHeight: 1.82, marginBottom: 32 }}>
                             My stack revolves around <strong style={{ color: t.text }}>Flutter, Dart, Firebase, and REST APIs</strong> with
-                            a deep focus on clean architecture, state management, and pixel-perfect UI/UX.
+                            deep focus on clean architecture, state management (GetX, BLoC, Provider), and pixel-perfect UI.
                         </p>
 
-                        {/* CTA */}
+                        {/* CTA buttons */}
                         <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-                            <a href="/resume.pdf" download style={{
-                                display: "inline-flex", alignItems: "center", gap: 7,
-                                padding: "10px 20px", background: t.accent, color: "#fff",
-                                border: "none", borderRadius: 8, fontSize: 13, fontWeight: 600,
-                                textDecoration: "none", fontFamily: "'Outfit', sans-serif",
-                                transition: "all 0.2s",
-                            }}
-                                onMouseEnter={e => { e.currentTarget.style.background = t.accentHover; }}
-                                onMouseLeave={e => { e.currentTarget.style.background = t.accent; }}
-                            >
-                                <Download size={14} /> Resume
-                            </a>
-                            <a href="https://github.com/riishal" target="_blank" rel="noreferrer" style={{
-                                display: "inline-flex", alignItems: "center", gap: 7,
-                                padding: "9px 18px", background: "transparent", color: t.text2,
-                                border: `1.5px solid ${t.border2}`, borderRadius: 8, fontSize: 13, fontWeight: 600,
-                                textDecoration: "none", fontFamily: "'Outfit', sans-serif",
-                                transition: "all 0.2s",
-                            }}
-                                onMouseEnter={e => { e.currentTarget.style.borderColor = t.accent; e.currentTarget.style.color = t.accent; }}
-                                onMouseLeave={e => { e.currentTarget.style.borderColor = t.border2; e.currentTarget.style.color = t.text2; }}
-                            >
-                                <ExternalLink size={14} /> GitHub
-                            </a>
+                            <AboutBtn href="/resume.pdf" download icon={<Download size={13} />} label="Resume" t={t} primary />
+                            <AboutBtn href="https://github.com/riishal" target="_blank" icon={<ExternalLink size={13} />} label="GitHub" t={t} />
                         </div>
                     </div>
                 </div>
 
                 {/* Skills */}
                 <div style={{
-                    marginBottom: 72,
+                    marginBottom: 80,
                     opacity: vis ? 1 : 0,
-                    transform: vis ? "none" : "translateY(20px)",
-                    transition: "opacity 0.6s ease 0.25s, transform 0.6s ease 0.25s",
+                    transform: vis ? "none" : "translateY(24px)",
+                    transition: "opacity 0.7s ease 0.28s, transform 0.7s ease 0.28s",
                 }}>
                     <SubLabel label="Technical Skills" t={t} />
                     <div className="skills-grid" style={{
                         display: "grid",
                         gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-                        gap: 12, marginTop: 16,
+                        gap: 10, marginTop: 18,
                     }}>
                         {SKILLS.map(({ cat, items }) => (
-                            <div key={cat} style={{
-                                padding: "16px 16px",
-                                background: t.bgCard, border: `1px solid ${t.border}`,
-                                borderRadius: 12,
-                            }}>
-                                <div style={{
-                                    fontSize: 10, color: t.accent, letterSpacing: 1.5,
-                                    textTransform: "uppercase", marginBottom: 12, fontWeight: 700,
-                                    fontFamily: "'Outfit', sans-serif",
-                                }}>{cat}</div>
-                                <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
-                                    {items.map(s => <SkillPill key={s} s={s} t={t} />)}
-                                </div>
-                            </div>
+                            <SkillCard key={cat} cat={cat} items={items} t={t} />
                         ))}
                     </div>
                 </div>
@@ -204,12 +197,12 @@ export default function About() {
                 {/* Experience */}
                 <div style={{
                     opacity: vis ? 1 : 0,
-                    transform: vis ? "none" : "translateY(20px)",
-                    transition: "opacity 0.6s ease 0.35s, transform 0.6s ease 0.35s",
+                    transform: vis ? "none" : "translateY(24px)",
+                    transition: "opacity 0.7s ease 0.36s, transform 0.7s ease 0.36s",
                 }}>
                     <SubLabel label="Work Experience" t={t} />
                     <div style={{ display: "flex", flexDirection: "column", marginTop: 24 }}>
-                        {EXP.map((e, i) => <ExpItem key={i} e={e} i={i} last={i === EXP.length - 1} t={t} />)}
+                        {EXP.map((e, i) => <ExpItem key={i} e={e} last={i === EXP.length - 1} t={t} />)}
                     </div>
                 </div>
             </div>
@@ -217,9 +210,8 @@ export default function About() {
             <style>{`
         @media (max-width: 768px) {
           .about-grid { flex-direction: column !important; align-items: center !important; }
-          .about-photo-col { width: 100% !important; max-width: 240px !important; margin: 0 auto !important; }
-          .about-bio-col { text-align: center !important; width: 100% !important; }
-          .about-bio-col > div { justify-content: center !important; }
+          .about-photo-col { width: 100% !important; max-width: 260px !important; }
+          .about-bio-col { text-align: left !important; }
         }
         @media (max-width: 480px) {
           .skills-grid { grid-template-columns: 1fr !important; }
@@ -229,16 +221,16 @@ export default function About() {
     );
 }
 
-function SectionLabel({ label, t, vis }) {
+function Eyebrow({ label, t, vis }) {
     return (
         <div style={{
-            display: "flex", alignItems: "center", gap: 10, marginBottom: 12,
+            display: "flex", alignItems: "center", gap: 10, marginBottom: 14,
             opacity: vis ? 1 : 0, transition: "opacity 0.5s ease",
         }}>
-            <div style={{ width: 20, height: 2, background: t.accent, borderRadius: 2 }} />
+            <div style={{ width: 18, height: 1.5, background: t.accent, borderRadius: 2 }} />
             <span style={{
-                fontFamily: "'Outfit', sans-serif", fontSize: 11,
-                color: t.accent, letterSpacing: 2.5, textTransform: "uppercase", fontWeight: 600,
+                fontFamily: "'Syne', sans-serif", fontSize: 10.5,
+                color: t.accent, letterSpacing: 2.5, textTransform: "uppercase", fontWeight: 700,
             }}>{label}</span>
         </div>
     );
@@ -247,9 +239,37 @@ function SectionLabel({ label, t, vis }) {
 function SubLabel({ label, t }) {
     return (
         <div style={{
-            fontSize: 10, color: t.text3, letterSpacing: 2,
-            textTransform: "uppercase", marginBottom: 4, fontWeight: 600,
+            fontSize: 10.5, color: t.text3, letterSpacing: 2,
+            textTransform: "uppercase", marginBottom: 4, fontWeight: 700,
+            fontFamily: "'Syne', sans-serif",
         }}>{label}</div>
+    );
+}
+
+function SkillCard({ cat, items, t }) {
+    const [h, setH] = useState(false);
+    return (
+        <div
+            onMouseEnter={() => setH(true)}
+            onMouseLeave={() => setH(false)}
+            style={{
+                padding: "16px 16px",
+                background: t.bgCard,
+                border: `1px solid ${h ? t.accentBorder : t.border}`,
+                borderRadius: 10,
+                transition: "border-color 0.2s, transform 0.2s",
+                transform: h ? "translateY(-2px)" : "none",
+            }}
+        >
+            <div style={{
+                fontSize: 10, color: t.accent, letterSpacing: 1.5,
+                textTransform: "uppercase", marginBottom: 12, fontWeight: 700,
+                fontFamily: "'Syne', sans-serif",
+            }}>{cat}</div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
+                {items.map(s => <SkillPill key={s} s={s} t={t} />)}
+            </div>
+        </div>
     );
 }
 
@@ -263,7 +283,7 @@ function SkillPill({ s, t }) {
                 display: "inline-block", padding: "4px 10px",
                 background: h ? t.accentBg : "transparent",
                 border: `1px solid ${h ? t.accentBorder : t.border}`,
-                borderRadius: 6, fontSize: 11.5,
+                borderRadius: 5, fontSize: 11.5,
                 color: h ? t.accent : t.text2, fontWeight: 500,
                 transition: "all 0.18s", cursor: "default",
             }}
@@ -271,38 +291,32 @@ function SkillPill({ s, t }) {
     );
 }
 
-function ExpItem({ e, i, last, t }) {
+function ExpItem({ e, last, t }) {
     const [h, setH] = useState(false);
     const { Icon } = e;
     return (
-        <div style={{
-            display: "flex", gap: 14,
-            paddingBottom: last ? 0 : 24, position: "relative",
-        }}>
+        <div style={{ display: "flex", gap: 14, paddingBottom: last ? 0 : 22, position: "relative" }}>
             {!last && (
                 <div style={{
                     position: "absolute", left: 10, top: 24, bottom: 0, width: 1,
                     background: `linear-gradient(to bottom, ${t.accentBorder}, transparent)`,
                 }} />
             )}
-
-            {/* Icon */}
             <div style={{
-                flexShrink: 0, marginTop: 2,
-                width: 22, height: 22, borderRadius: "50%",
+                flexShrink: 0, marginTop: 2, width: 22, height: 22, borderRadius: "50%",
                 background: t.accentBg, border: `1.5px solid ${t.accentBorder}`,
                 display: "flex", alignItems: "center", justifyContent: "center",
             }}>
                 <Icon size={11} color={t.accent} strokeWidth={2.5} />
             </div>
-
             <div
                 onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
                 style={{
                     flex: 1, padding: "14px 16px",
                     background: h ? t.accentBg : t.bgCard,
                     border: `1px solid ${h ? t.accentBorder : t.border}`,
-                    borderRadius: 12, transition: "all 0.22s", cursor: "default",
+                    borderRadius: 10, transition: "all 0.22s", cursor: "default",
+                    transform: h ? "translateX(3px)" : "none",
                 }}
             >
                 <div style={{
@@ -310,12 +324,12 @@ function ExpItem({ e, i, last, t }) {
                     justifyContent: "space-between", gap: 8, marginBottom: 8,
                 }}>
                     <div>
-                        <div style={{ fontSize: 14.5, fontWeight: 700, color: t.text }}>{e.role}</div>
-                        <div style={{ fontSize: 13.5, fontWeight: 600, color: t.accent, marginTop: 1 }}>{e.co}</div>
+                        <div style={{ fontSize: 14.5, fontWeight: 700, color: t.text, fontFamily: "'Syne', sans-serif" }}>{e.role}</div>
+                        <div style={{ fontSize: 13, fontWeight: 600, color: t.accent, marginTop: 1 }}>{e.co}</div>
                         <div style={{ fontSize: 11, color: t.text3, marginTop: 2 }}>{e.sub}</div>
                     </div>
                     <span style={{
-                        fontFamily: "'Outfit', sans-serif", fontSize: 10, color: t.accent,
+                        fontFamily: "'Syne', sans-serif", fontSize: 10, color: t.accent,
                         background: t.accentBg, border: `1px solid ${t.accentBorder}`,
                         padding: "3px 9px", borderRadius: 5, height: "fit-content", whiteSpace: "nowrap",
                     }}>{e.period}</span>
@@ -324,14 +338,35 @@ function ExpItem({ e, i, last, t }) {
                     {e.pts.map((pt, pi) => (
                         <li key={pi} style={{
                             display: "flex", gap: 7, alignItems: "flex-start",
-                            color: t.text2, fontSize: 12.5, lineHeight: 1.6, marginBottom: 4,
+                            color: t.text2, fontSize: 12.5, lineHeight: 1.65, marginBottom: 4,
                         }}>
                             <ChevronRight size={11} color={t.accent} style={{ flexShrink: 0, marginTop: 3 }} />
-                            <span>{pt}</span>
+                            {pt}
                         </li>
                     ))}
                 </ul>
             </div>
         </div>
+    );
+}
+
+function AboutBtn({ href, download, target, icon, label, t, primary }) {
+    const [h, setH] = useState(false);
+    return (
+        <a href={href} download={download} target={target} rel={target ? "noreferrer" : undefined}
+            onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
+            style={{
+                display: "inline-flex", alignItems: "center", gap: 7,
+                padding: primary ? "10px 20px" : "9px 18px",
+                background: primary ? (h ? t.accentHover : t.accent) : (h ? t.accentBg : "transparent"),
+                color: primary ? "#fff" : (h ? t.accent : t.text2),
+                border: primary ? "none" : `1.5px solid ${h ? t.accent : t.border2}`,
+                borderRadius: 7, fontSize: 13, fontWeight: 600,
+                textDecoration: "none", fontFamily: "'Syne', sans-serif",
+                transform: h ? "translateY(-2px)" : "none",
+                transition: "all 0.2s cubic-bezier(0.16,1,0.3,1)",
+                boxShadow: h && primary ? t.shadowAccent : "none",
+            }}
+        >{icon}{label}</a>
     );
 }
