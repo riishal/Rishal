@@ -34,7 +34,7 @@ import gym3 from "../assets/gymApp/gym3.jpeg";
 import gym4 from "../assets/gymApp/gym4.jpeg";
 import gym5 from "../assets/gymApp/gym5.jpeg";
 import gym6 from "../assets/gymApp/gym6.jpeg";
-import gymImg from "../assets/gymApp/gymimage.Jpg";
+import gymImg from "../assets/gymApp/gymimage.jpg";
 //bizsmart
 import bizsmartImg from "../assets/bizsmart/bizsmartimage.jpeg";
 import bizsmart1 from "../assets/bizsmart/bizsmart1.jpeg";
