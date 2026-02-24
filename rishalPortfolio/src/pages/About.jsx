@@ -1,15 +1,17 @@
+// About.jsx
 import { useState } from "react";
 import {
     Rocket, Laptop, Code2, GraduationCap,
     Download, ExternalLink, ChevronRight,
+    Briefcase, Award, Calendar, MapPin
 } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import { useInView } from "../hooks/useInView";
 import aboutImg from "../assets/about.jpg";
 
 const SKILLS = [
-    { cat: "Mobile", items: ["Flutter", "Dart", "GetX", "Provider", "BLoC", "Riverpod"] },
-    { cat: "Backend", items: ["Firebase Auth", "Firestore", "Realtime DB", "Hive", "SQLite"] },
+    { cat: "Mobile Development", items: ["Flutter", "Dart", "GetX", "Provider", "BLoC", "Riverpod"] },
+    { cat: "Backend & Database", items: ["Firebase Auth", "Firestore", "Realtime DB", "Hive", "SQLite"] },
     { cat: "API & Integrations", items: ["REST APIs", "Dio", "FCM", "Payment Gateway", "Maps SDK", "PDF Gen"] },
     { cat: "DevOps & Tools", items: ["Git & GitHub", "Play Store", "App Signing", "CI/CD", "Android Studio"] },
 ];
@@ -18,7 +20,7 @@ const EXP = [
     {
         role: "Flutter Developer",
         co: "EBSOR Infosystems",
-        sub: "Full-time · Manjeri (Saudi-Based Client)",
+        sub: "Full-time · Remote",
         period: "May 2025 – Present",
         Icon: Rocket,
         pts: [
@@ -44,7 +46,7 @@ const EXP = [
     {
         role: "Software Developer",
         co: "XpertConsortium Technologies LLP",
-        sub: "Full-time · Calicut, India",
+        sub: "Full-time · On-site",
         period: "May 2023 – Jan 2024",
         Icon: Code2,
         pts: [
@@ -55,7 +57,7 @@ const EXP = [
     {
         role: "Flutter Intern",
         co: "Edapt",
-        sub: "Internship · Malappuram",
+        sub: "Internship · On-site",
         period: "Sep 2022 – Mar 2023",
         Icon: GraduationCap,
         pts: [
@@ -67,126 +69,203 @@ const EXP = [
 
 export default function About() {
     const { t } = useTheme();
-    const [ref, vis] = useInView(0.07);
+    const [ref, vis] = useInView(0.1);
 
     return (
         <section id="about" ref={ref} style={{
             background: t.bg,
-            padding: "96px clamp(24px, 6vw, 96px)",
-            borderTop: `1px solid ${t.border}`,
+            padding: "80px 20px",
         }}>
-            <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+            <div style={{
+                maxWidth: 1200,
+                margin: "0 auto",
+            }}>
 
-                {/* Section eyebrow */}
-                <Eyebrow label="About Me" t={t} vis={vis} />
-
-                {/* Profile row */}
-                <div className="about-grid" style={{
-                    display: "flex", gap: "clamp(28px, 6vw, 72px)",
-                    alignItems: "flex-start", marginBottom: 80, flexWrap: "wrap",
+                {/* Section Header */}
+                <div style={{
+                    marginBottom: 40,
+                    opacity: vis ? 1 : 0,
+                    transform: vis ? "translateY(0)" : "translateY(30px)",
+                    transition: "all 0.8s ease",
                 }}>
-                    {/* Photo — rectangular, no border-radius */}
-                    <div className="about-photo-col" style={{
-                        flex: "0 0 auto",
-                        width: "clamp(160px, 18vw, 240px)",
-                        opacity: vis ? 1 : 0,
-                        transform: vis ? "none" : "translateX(-24px)",
-                        transition: "opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s",
+                    <span style={{
+                        color: t.accent,
+                        fontSize: "clamp(12px, 3vw, 14px)",
+                        fontWeight: 600,
+                        letterSpacing: 2,
+                        textTransform: "uppercase",
+                        fontFamily: "'Syne', sans-serif",
                     }}>
+                        About Me
+                    </span>
+                    <h2 style={{
+                        fontFamily: "'Syne', sans-serif",
+                        fontSize: "clamp(28px, 8vw, 56px)",
+                        fontWeight: 800,
+                        lineHeight: 1.1,
+                        color: t.text,
+                        marginTop: 12,
+                    }}>
+                        Crafting digital
+                        <span style={{ color: t.accent, display: "block" }}>
+                            experiences that matter
+                        </span>
+                    </h2>
+                </div>
+
+                {/* Profile Section - Responsive Grid */}
+                <div style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+                    gap: "clamp(30px, 5vw, 60px)",
+                    marginBottom: 60,
+                }}>
+                    
+                    {/* Left Column - Photo & Stats */}
+                    <div style={{
+                        opacity: vis ? 1 : 0,
+                        transform: vis ? "translateX(0)" : "translateX(-30px)",
+                        transition: "all 0.8s ease 0.2s",
+                    }}>
+                        {/* Photo */}
                         <div style={{
-                            position: "relative", overflow: "hidden",
-                            borderRadius: 4,  /* very subtle, almost square */
-                        }}
-                            onMouseEnter={e => { e.currentTarget.querySelector("img").style.transform = "scale(1.04)"; }}
-                            onMouseLeave={e => { e.currentTarget.querySelector("img").style.transform = "scale(1)"; }}
-                        >
-                            <img src={aboutImg} alt="Rishal" style={{
-                                width: "100%", height: "auto", display: "block",
-                                transition: "transform 0.5s cubic-bezier(0.16,1,0.3,1)",
-                            }} />
-                            {/* bottom gradient overlay */}
+                            position: "relative",
+                            borderRadius: 20,
+                            overflow: "hidden",
+                            boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
+                            aspectRatio: "1/1",
+                            maxWidth: 400,
+                            margin: "0 auto",
+                        }}>
+                            <img 
+                                src={aboutImg} 
+                                alt="Rishal" 
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "cover",
+                                    display: "block",
+                                    transition: "transform 0.6s ease",
+                                }}
+                            />
                             <div style={{
-                                position: "absolute", bottom: 0, left: 0, right: 0, height: "30%",
-                                background: `linear-gradient(to top, ${t.bg} 0%, transparent 100%)`,
-                                pointerEvents: "none",
+                                position: "absolute",
+                                bottom: 0,
+                                left: 0,
+                                right: 0,
+                                height: "30%",
+                                background: `linear-gradient(to top, ${t.bg}, transparent)`,
                             }} />
                         </div>
-
-                        {/* Simple fact pills */}
-                        <div style={{ display: "flex", flexDirection: "column", gap: 6, marginTop: 14 }}>
-                            {["3 Apps on Play Store", "BSc Computer Science", "Kerala, India"].map(text => (
-                                <div key={text} style={{
-                                    display: "flex", alignItems: "center", gap: 8,
-                                    padding: "7px 11px", background: t.bgCard,
-                                    border: `1px solid ${t.border}`, borderRadius: 6,
-                                    transition: "border-color 0.2s, transform 0.2s",
-                                    cursor: "default",
-                                }}
-                                    onMouseEnter={e => {
-                                        e.currentTarget.style.borderColor = t.accentBorder;
-                                        e.currentTarget.style.transform = "translateX(4px)";
-                                    }}
-                                    onMouseLeave={e => {
-                                        e.currentTarget.style.borderColor = t.border;
-                                        e.currentTarget.style.transform = "none";
-                                    }}
-                                >
-                                    <div style={{ width: 4, height: 4, borderRadius: "50%", background: t.accent, flexShrink: 0 }} />
-                                    <span style={{ color: t.text2, fontSize: 12, fontWeight: 500 }}>{text}</span>
-                                </div>
-                            ))}
+                        
+                        {/* Stats Cards - Responsive Grid */}
+                        <div style={{
+                            display: "grid",
+                            gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+                            gap: 12,
+                            marginTop: 20,
+                        }}>
+                            <StatCard 
+                                icon={<Briefcase size={18} />}
+                                value="3+ Years"
+                                label="Experience"
+                                t={t}
+                            />
+                            <StatCard 
+                                icon={<Award size={18} />}
+                                value="12+ Apps"
+                                label="Delivered"
+                                t={t}
+                            />
                         </div>
                     </div>
 
-                    {/* Bio */}
-                    <div className="about-bio-col" style={{
-                        flex: 1, minWidth: "min(100%, 280px)",
+                    {/* Right Column - Bio */}
+                    <div style={{
                         opacity: vis ? 1 : 0,
-                        transform: vis ? "none" : "translateY(24px)",
-                        transition: "opacity 0.7s ease 0.18s, transform 0.7s ease 0.18s",
+                        transform: vis ? "translateY(0)" : "translateY(30px)",
+                        transition: "all 0.8s ease 0.3s",
                     }}>
-                        <h2 style={{
+                        <h3 style={{
                             fontFamily: "'Syne', sans-serif",
-                            fontSize: "clamp(28px, 5vw, 46px)", fontWeight: 800,
-                            letterSpacing: "-0.03em", lineHeight: 1.05,
-                            color: t.text, marginBottom: 6,
-                        }}>Building apps</h2>
-                        <h2 style={{
-                            fontFamily: "'Syne', sans-serif",
-                            fontSize: "clamp(28px, 5vw, 46px)", fontWeight: 800,
-                            letterSpacing: "-0.03em", lineHeight: 1.05,
-                            color: t.accent, marginBottom: 22,
-                        }}>people love to use.</h2>
-
-                        <p style={{ color: t.text2, fontSize: "clamp(13.5px, 1.5vw, 15px)", lineHeight: 1.82, marginBottom: 14 }}>
-                            Flutter Developer with <strong style={{ color: t.text }}>3+ years of hands-on experience</strong> building
-                            high-performance cross-platform mobile and web applications.
+                            fontSize: "clamp(20px, 5vw, 28px)",
+                            fontWeight: 700,
+                            color: t.text,
+                            marginBottom: 16,
+                            lineHeight: 1.3,
+                        }}>
+                            Flutter Developer with a passion for creating seamless mobile experiences
+                        </h3>
+                        
+                        <p style={{
+                            color: t.text2,
+                            fontSize: "clamp(14px, 3vw, 16px)",
+                            lineHeight: 1.7,
+                            marginBottom: 16,
+                        }}>
+                            With <strong style={{ color: t.text }}>3+ years of hands-on experience</strong> in Flutter development, 
+                            I specialize in building high-performance cross-platform applications that users love. 
+                            My approach combines clean architecture with pixel-perfect UI implementation.
                         </p>
-                        <p style={{ color: t.text2, fontSize: "clamp(13.5px, 1.5vw, 15px)", lineHeight: 1.82, marginBottom: 32 }}>
-                            My stack revolves around <strong style={{ color: t.text }}>Flutter, Dart, Firebase, and REST APIs</strong> with
-                            deep focus on clean architecture, state management (GetX, BLoC, Provider), and pixel-perfect UI.
+                        
+                        <p style={{
+                            color: t.text2,
+                            fontSize: "clamp(14px, 3vw, 16px)",
+                            lineHeight: 1.7,
+                            marginBottom: 24,
+                        }}>
+                            I've worked with startups and established companies to deliver robust solutions 
+                            using <strong style={{ color: t.text }}>Flutter, Dart, Firebase, and REST APIs</strong>. 
+                            From logistics apps to CRM systems, I focus on writing maintainable code and 
+                            delivering exceptional user experiences.
                         </p>
 
-                        {/* CTA buttons */}
-                        <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-                            <AboutBtn href="/resume.pdf" download icon={<Download size={13} />} label="Resume" t={t} primary />
-                            <AboutBtn href="https://github.com/riishal" target="_blank" icon={<ExternalLink size={13} />} label="GitHub" t={t} />
+                        {/* CTA Buttons - Responsive */}
+                        <div style={{
+                            display: "flex",
+                            gap: 12,
+                            flexWrap: "wrap",
+                        }}>
+                            <Button 
+                                href="/resume.pdf" 
+                                download 
+                                icon={<Download size={16} />} 
+                                label="Download Resume" 
+                                t={t} 
+                                primary 
+                            />
+                            <Button 
+                                href="https://github.com/riishal" 
+                                target="_blank" 
+                                icon={<ExternalLink size={16} />} 
+                                label="View GitHub" 
+                                t={t} 
+                            />
                         </div>
                     </div>
                 </div>
 
-                {/* Skills */}
+                {/* Skills Section */}
                 <div style={{
-                    marginBottom: 80,
+                    marginBottom: 60,
                     opacity: vis ? 1 : 0,
-                    transform: vis ? "none" : "translateY(24px)",
-                    transition: "opacity 0.7s ease 0.28s, transform 0.7s ease 0.28s",
+                    transform: vis ? "translateY(0)" : "translateY(30px)",
+                    transition: "all 0.8s ease 0.4s",
                 }}>
-                    <SubLabel label="Technical Skills" t={t} />
-                    <div className="skills-grid" style={{
+                    <h4 style={{
+                        fontFamily: "'Syne', sans-serif",
+                        fontSize: "clamp(18px, 4vw, 20px)",
+                        fontWeight: 600,
+                        color: t.text,
+                        marginBottom: 20,
+                    }}>
+                        Technical Expertise
+                    </h4>
+                    
+                    <div style={{
                         display: "grid",
-                        gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-                        gap: 10, marginTop: 18,
+                        gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+                        gap: 16,
                     }}>
                         {SKILLS.map(({ cat, items }) => (
                             <SkillCard key={cat} cat={cat} items={items} t={t} />
@@ -194,179 +273,283 @@ export default function About() {
                     </div>
                 </div>
 
-                {/* Experience */}
+                {/* Experience Section */}
                 <div style={{
                     opacity: vis ? 1 : 0,
-                    transform: vis ? "none" : "translateY(24px)",
-                    transition: "opacity 0.7s ease 0.36s, transform 0.7s ease 0.36s",
+                    transform: vis ? "translateY(0)" : "translateY(30px)",
+                    transition: "all 0.8s ease 0.5s",
                 }}>
-                    <SubLabel label="Work Experience" t={t} />
-                    <div style={{ display: "flex", flexDirection: "column", marginTop: 24 }}>
-                        {EXP.map((e, i) => <ExpItem key={i} e={e} last={i === EXP.length - 1} t={t} />)}
+                    <h4 style={{
+                        fontFamily: "'Syne', sans-serif",
+                        fontSize: "clamp(18px, 4vw, 20px)",
+                        fontWeight: 600,
+                        color: t.text,
+                        marginBottom: 20,
+                    }}>
+                        Work Experience
+                    </h4>
+                    
+                    <div style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 16,
+                    }}>
+                        {EXP.map((item, index) => (
+                            <ExpItem key={index} item={item} t={t} />
+                        ))}
                     </div>
                 </div>
             </div>
-
-            <style>{`
-        @media (max-width: 768px) {
-          .about-grid { flex-direction: column !important; align-items: center !important; }
-          .about-photo-col { width: 100% !important; max-width: 260px !important; }
-          .about-bio-col { text-align: left !important; }
-        }
-        @media (max-width: 480px) {
-          .skills-grid { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
         </section>
     );
 }
 
-function Eyebrow({ label, t, vis }) {
-    return (
-        <div style={{
-            display: "flex", alignItems: "center", gap: 10, marginBottom: 14,
-            opacity: vis ? 1 : 0, transition: "opacity 0.5s ease",
-        }}>
-            <div style={{ width: 18, height: 1.5, background: t.accent, borderRadius: 2 }} />
-            <span style={{
-                fontFamily: "'Syne', sans-serif", fontSize: 10.5,
-                color: t.accent, letterSpacing: 2.5, textTransform: "uppercase", fontWeight: 700,
-            }}>{label}</span>
-        </div>
-    );
-}
-
-function SubLabel({ label, t }) {
-    return (
-        <div style={{
-            fontSize: 10.5, color: t.text3, letterSpacing: 2,
-            textTransform: "uppercase", marginBottom: 4, fontWeight: 700,
-            fontFamily: "'Syne', sans-serif",
-        }}>{label}</div>
-    );
-}
-
-function SkillCard({ cat, items, t }) {
+// Helper Components
+function StatCard({ icon, value, label, t }) {
     const [h, setH] = useState(false);
+    
     return (
         <div
             onMouseEnter={() => setH(true)}
             onMouseLeave={() => setH(false)}
             style={{
-                padding: "16px 16px",
                 background: t.bgCard,
                 border: `1px solid ${h ? t.accentBorder : t.border}`,
-                borderRadius: 10,
-                transition: "border-color 0.2s, transform 0.2s",
-                transform: h ? "translateY(-2px)" : "none",
+                borderRadius: 16,
+                padding: "16px 12px",
+                transition: "all 0.3s ease",
+                transform: h ? "translateY(-4px)" : "none",
+                boxShadow: h ? `0 12px 24px ${t.shadowColor || 'rgba(0,0,0,0.1)'}` : "none",
+                textAlign: "center",
             }}
         >
             <div style={{
-                fontSize: 10, color: t.accent, letterSpacing: 1.5,
-                textTransform: "uppercase", marginBottom: 12, fontWeight: 700,
-                fontFamily: "'Syne', sans-serif",
-            }}>{cat}</div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
-                {items.map(s => <SkillPill key={s} s={s} t={t} />)}
+                width: 40,
+                height: 40,
+                borderRadius: 12,
+                background: t.accentBg,
+                border: `1px solid ${t.accentBorder}`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "0 auto 10px",
+                color: t.accent,
+            }}>
+                {icon}
+            </div>
+            <div style={{
+                fontSize: "clamp(18px, 4vw, 20px)",
+                fontWeight: 700,
+                color: t.text
+            }}>
+                {value}
+            </div>
+            <div style={{
+                fontSize: "clamp(12px, 3vw, 13px)",
+                color: t.text2
+            }}>
+                {label}
             </div>
         </div>
     );
 }
 
-function SkillPill({ s, t }) {
+function SkillCard({ cat, items, t }) {
     const [h, setH] = useState(false);
+    
     return (
-        <span
+        <div
             onMouseEnter={() => setH(true)}
             onMouseLeave={() => setH(false)}
             style={{
-                display: "inline-block", padding: "4px 10px",
-                background: h ? t.accentBg : "transparent",
+                background: t.bgCard,
                 border: `1px solid ${h ? t.accentBorder : t.border}`,
-                borderRadius: 5, fontSize: 11.5,
-                color: h ? t.accent : t.text2, fontWeight: 500,
-                transition: "all 0.18s", cursor: "default",
+                borderRadius: 16,
+                padding: 20,
+                transition: "all 0.3s ease",
+                transform: h ? "translateY(-4px)" : "none",
+                boxShadow: h ? `0 16px 32px ${t.shadowColor || 'rgba(0,0,0,0.1)'}` : "none",
             }}
-        >{s}</span>
-    );
-}
-
-function ExpItem({ e, last, t }) {
-    const [h, setH] = useState(false);
-    const { Icon } = e;
-    return (
-        <div style={{ display: "flex", gap: 14, paddingBottom: last ? 0 : 22, position: "relative" }}>
-            {!last && (
-                <div style={{
-                    position: "absolute", left: 10, top: 24, bottom: 0, width: 1,
-                    background: `linear-gradient(to bottom, ${t.accentBorder}, transparent)`,
-                }} />
-            )}
+        >
             <div style={{
-                flexShrink: 0, marginTop: 2, width: 22, height: 22, borderRadius: "50%",
-                background: t.accentBg, border: `1.5px solid ${t.accentBorder}`,
-                display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: "clamp(13px, 3vw, 14px)",
+                fontWeight: 600,
+                color: t.accent,
+                marginBottom: 12,
+                fontFamily: "'Syne', sans-serif",
             }}>
-                <Icon size={11} color={t.accent} strokeWidth={2.5} />
+                {cat}
             </div>
-            <div
-                onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
-                style={{
-                    flex: 1, padding: "14px 16px",
-                    background: h ? t.accentBg : t.bgCard,
-                    border: `1px solid ${h ? t.accentBorder : t.border}`,
-                    borderRadius: 10, transition: "all 0.22s", cursor: "default",
-                    transform: h ? "translateX(3px)" : "none",
-                }}
-            >
-                <div style={{
-                    display: "flex", flexWrap: "wrap",
-                    justifyContent: "space-between", gap: 8, marginBottom: 8,
-                }}>
-                    <div>
-                        <div style={{ fontSize: 14.5, fontWeight: 700, color: t.text, fontFamily: "'Syne', sans-serif" }}>{e.role}</div>
-                        <div style={{ fontSize: 13, fontWeight: 600, color: t.accent, marginTop: 1 }}>{e.co}</div>
-                        <div style={{ fontSize: 11, color: t.text3, marginTop: 2 }}>{e.sub}</div>
-                    </div>
-                    <span style={{
-                        fontFamily: "'Syne', sans-serif", fontSize: 10, color: t.accent,
-                        background: t.accentBg, border: `1px solid ${t.accentBorder}`,
-                        padding: "3px 9px", borderRadius: 5, height: "fit-content", whiteSpace: "nowrap",
-                    }}>{e.period}</span>
-                </div>
-                <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
-                    {e.pts.map((pt, pi) => (
-                        <li key={pi} style={{
-                            display: "flex", gap: 7, alignItems: "flex-start",
-                            color: t.text2, fontSize: 12.5, lineHeight: 1.65, marginBottom: 4,
-                        }}>
-                            <ChevronRight size={11} color={t.accent} style={{ flexShrink: 0, marginTop: 3 }} />
-                            {pt}
-                        </li>
-                    ))}
-                </ul>
+            <div style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 6,
+            }}>
+                {items.map(skill => (
+                    <span
+                        key={skill}
+                        style={{
+                            padding: "4px 10px",
+                            background: t.bg,
+                            border: `1px solid ${t.border}`,
+                            borderRadius: 8,
+                            fontSize: "clamp(11px, 2.5vw, 13px)",
+                            color: t.text2,
+                        }}
+                    >
+                        {skill}
+                    </span>
+                ))}
             </div>
         </div>
     );
 }
 
-function AboutBtn({ href, download, target, icon, label, t, primary }) {
+function ExpItem({ item, t }) {
     const [h, setH] = useState(false);
+    const { Icon } = item;
+    
     return (
-        <a href={href} download={download} target={target} rel={target ? "noreferrer" : undefined}
-            onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
+        <div
+            onMouseEnter={() => setH(true)}
+            onMouseLeave={() => setH(false)}
             style={{
-                display: "inline-flex", alignItems: "center", gap: 7,
-                padding: primary ? "10px 20px" : "9px 18px",
-                background: primary ? (h ? t.accentHover : t.accent) : (h ? t.accentBg : "transparent"),
-                color: primary ? "#fff" : (h ? t.accent : t.text2),
-                border: primary ? "none" : `1.5px solid ${h ? t.accent : t.border2}`,
-                borderRadius: 7, fontSize: 13, fontWeight: 600,
-                textDecoration: "none", fontFamily: "'Syne', sans-serif",
-                transform: h ? "translateY(-2px)" : "none",
-                transition: "all 0.2s cubic-bezier(0.16,1,0.3,1)",
-                boxShadow: h && primary ? t.shadowAccent : "none",
+                background: t.bgCard,
+                border: `1px solid ${h ? t.accentBorder : t.border}`,
+                borderRadius: 16,
+                padding: "clamp(16px, 4vw, 24px)",
+                transition: "all 0.3s ease",
+                transform: h ? "translateX(8px)" : "none",
+                boxShadow: h ? `0 16px 32px ${t.shadowColor || 'rgba(0,0,0,0.1)'}` : "none",
             }}
-        >{icon}{label}</a>
+        >
+            {/* Header - Responsive */}
+            <div style={{
+                display: "flex",
+                flexDirection: window.innerWidth <= 640 ? "column" : "row",
+                flexWrap: "wrap",
+                justifyContent: "space-between",
+                alignItems: window.innerWidth <= 640 ? "flex-start" : "center",
+                gap: 12,
+                marginBottom: 16,
+            }}>
+                <div style={{
+                    display: "flex",
+                    gap: 12,
+                    alignItems: "center",
+                    width: window.innerWidth <= 640 ? "100%" : "auto",
+                }}>
+                    <div style={{
+                        width: 48,
+                        height: 48,
+                        borderRadius: 12,
+                        background: t.accentBg,
+                        border: `1px solid ${t.accentBorder}`,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: t.accent,
+                        flexShrink: 0,
+                    }}>
+                        <Icon size={22} />
+                    </div>
+                    <div>
+                        <h5 style={{
+                            fontSize: "clamp(16px, 4vw, 18px)",
+                            fontWeight: 700,
+                            color: t.text,
+                            marginBottom: 2,
+                        }}>{item.role}</h5>
+                        <div style={{
+                            fontSize: "clamp(13px, 3vw, 14px)",
+                            color: t.accent,
+                            fontWeight: 500
+                        }}>
+                            {item.co}
+                        </div>
+                    </div>
+                </div>
+                
+                <span style={{
+                    fontSize: "clamp(12px, 2.5vw, 13px)",
+                    color: t.text2,
+                    background: t.bg,
+                    padding: "6px 12px",
+                    borderRadius: 8,
+                    border: `1px solid ${t.border}`,
+                    whiteSpace: "nowrap",
+                    width: window.innerWidth <= 640 ? "100%" : "auto",
+                    textAlign: "center",
+                }}>
+                    {item.period}
+                </span>
+            </div>
+            
+            {/* Points */}
+            <ul style={{
+                margin: 0,
+                padding: 0,
+                listStyle: "none",
+            }}>
+                {item.pts.map((pt, idx) => (
+                    <li key={idx} style={{
+                        display: "flex",
+                        gap: 8,
+                        alignItems: "flex-start",
+                        color: t.text2,
+                        fontSize: "clamp(13px, 3vw, 14px)",
+                        lineHeight: 1.6,
+                        marginBottom: 8,
+                    }}>
+                        <ChevronRight 
+                            size={14} 
+                            color={t.accent} 
+                            style={{
+                                flexShrink: 0,
+                                marginTop: 3,
+                            }}
+                        />
+                        <span>{pt}</span>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}
+
+function Button({ href, download, target, icon, label, t, primary }) {
+    const [h, setH] = useState(false);
+    
+    return (
+        <a
+            href={href}
+            download={download}
+            target={target}
+            rel={target ? "noopener noreferrer" : undefined}
+            onMouseEnter={() => setH(true)}
+            onMouseLeave={() => setH(false)}
+            style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 8,
+                padding: primary ? "12px 24px" : "10px 20px",
+                background: primary ? t.accent : "transparent",
+                color: primary ? "#fff" : t.text,
+                border: primary ? "none" : `2px solid ${t.border}`,
+                borderRadius: 12,
+                fontSize: "clamp(13px, 3vw, 14px)",
+                fontWeight: 600,
+                textDecoration: "none",
+                transition: "all 0.3s ease",
+                transform: h ? "translateY(-2px)" : "none",
+                boxShadow: h && primary ? `0 12px 24px ${t.accent}40` : "none",
+                cursor: "pointer",
+                width: window.innerWidth <= 480 ? "100%" : "auto",
+            }}
+        >
+            {icon}
+            {label}
+        </a>
     );
 }
