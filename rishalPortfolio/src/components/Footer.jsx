@@ -1,56 +1,80 @@
-import { useState } from "react";
-import { Github, Linkedin, Globe } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
-
-const LINKS = [
-    { Icon: Github, label: "GitHub", url: "https://github.com/riishal" },
-    { Icon: Linkedin, label: "LinkedIn", url: "https://www.linkedin.com/in/rishal-muhammed-9bb017262" },
-    { Icon: Globe, label: "Portfolio", url: "https://rishal-51207.web.app/" },
-];
 
 export default function Footer() {
     const { t } = useTheme();
+    const currentYear = new Date().getFullYear();
+
     return (
         <footer style={{
             borderTop: `1px solid ${t.border}`,
-            padding: "20px clamp(24px, 6vw, 96px)",
+            padding: "32px clamp(24px, 6vw, 96px)",
             background: t.bg,
-            display: "flex", justifyContent: "space-between",
-            alignItems: "center", flexWrap: "wrap", gap: 12,
         }}>
             <div style={{
-                fontFamily: "'Syne', sans-serif", fontSize: 18, fontWeight: 800,
-                color: t.text, letterSpacing: "-0.5px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                flexWrap: "wrap",
+                gap: 20,
+                flexDirection: "row",
             }}>
-                R<span style={{ color: t.accent }}>.</span>
+                {/* Logo */}
+                <div style={{
+                    fontFamily: "'Syne', sans-serif",
+                    fontSize: 24,
+                    fontWeight: 800,
+                    color: t.text,
+                    letterSpacing: "-0.5px",
+                    order: 1,
+                    width: "auto",
+                }}>
+                    R<span style={{ color: t.accent }}>.</span>
+                </div>
+
+                {/* Copyright - Centered on mobile */}
+                <div style={{ 
+                    fontSize: 13, 
+                    color: t.text3, 
+                    fontFamily: "'Syne', sans-serif",
+                    letterSpacing: "0.2px",
+                    order: { xs: 3, sm: 2 },
+                    width: { xs: "100%", sm: "auto" },
+                    textAlign: { xs: "center", sm: "left" },
+                }}>
+                    © {currentYear} Rishal Muhammed · Flutter Developer
+                </div>
+
+                {/* Location */}
+                <div style={{ 
+                    fontSize: 13, 
+                    color: t.text3, 
+                    fontFamily: "'Syne', sans-serif",
+                    order: { xs: 2, sm: 3 },
+                    width: { xs: "100%", sm: "auto" },
+                    textAlign: { xs: "center", sm: "right" },
+                }}>
+                    Kerala, India
+                </div>
             </div>
 
-            <div style={{ fontSize: 11.5, color: t.text3, fontFamily: "'Syne', sans-serif" }}>
-                © 2025 Rishal · Flutter Developer · Kerala
-            </div>
-
-            <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
-                {LINKS.map(({ Icon, label, url }) => (
-                    <FootLink key={label} Icon={Icon} label={label} url={url} t={t} />
-                ))}
-            </div>
+            {/* Mobile Style Override */}
+            <style>{`
+                @media (max-width: 640px) {
+                    footer > div {
+                        flex-direction: column !important;
+                        gap: 12px !important;
+                    }
+                    
+                    footer > div > div {
+                        width: 100% !important;
+                        text-align: center !important;
+                    }
+                    
+                    footer > div > div:first-child {
+                        margin-bottom: 4px;
+                    }
+                }
+            `}</style>
         </footer>
-    );
-}
-
-function FootLink({ Icon, label, url, t }) {
-    const [h, setH] = useState(false);
-    return (
-        <a href={url} target="_blank" rel="noreferrer"
-            onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
-            style={{
-                display: "flex", alignItems: "center", gap: 5,
-                fontSize: 12, color: h ? t.accent : t.text3,
-                transition: "color 0.18s", textDecoration: "none",
-                fontFamily: "'Syne', sans-serif",
-            }}>
-            <Icon size={13} strokeWidth={2} color={h ? t.accent : t.text3} style={{ transition: "color 0.18s" }} />
-            {label}
-        </a>
     );
 }

@@ -81,36 +81,52 @@ export default function About() {
                 margin: "0 auto",
             }}>
 
-                {/* Section Header */}
+                   {/* ── Section Header — unified design ── */}
                 <div style={{
-                    marginBottom: 40,
+                    textAlign: "center",
+                    marginBottom: "clamp(36px, 5vw, 60px)",
                     opacity: vis ? 1 : 0,
-                    transform: vis ? "translateY(0)" : "translateY(30px)",
-                    transition: "all 0.8s ease",
+                    transform: vis ? "none" : "translateY(30px)",
+                    transition: "all 0.75s cubic-bezier(0.16,1,0.3,1)",
                 }}>
-                    <span style={{
-                        color: t.accent,
-                        fontSize: "clamp(12px, 3vw, 14px)",
-                        fontWeight: 600,
-                        letterSpacing: 2,
-                        textTransform: "uppercase",
-                        fontFamily: "'Syne', sans-serif",
-                    }}>
-                        About Me
-                    </span>
+                    {/* Eyebrow with lines */}
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12, marginBottom: 14 }}>
+                        <div style={{ width: 44, height: 1.5, background: `linear-gradient(90deg, transparent, ${t.accent})` }} />
+                        <span style={{
+                            fontFamily: "'Syne', sans-serif", fontSize: 10.5,
+                            color: t.accent, letterSpacing: 3.5, textTransform: "uppercase", fontWeight: 700,
+                        }}>About Me</span>
+                        <div style={{ width: 44, height: 1.5, background: `linear-gradient(90deg, ${t.accent}, transparent)` }} />
+                    </div>
+
+                    {/* Heading */}
                     <h2 style={{
                         fontFamily: "'Syne', sans-serif",
-                        fontSize: "clamp(28px, 8vw, 56px)",
-                        fontWeight: 800,
-                        lineHeight: 1.1,
-                        color: t.text,
-                        marginTop: 12,
+                        fontSize: "clamp(32px, 5vw, 60px)", fontWeight: 800,
+                        color: t.text, letterSpacing: "-0.035em", lineHeight: 1.05, marginBottom: 14,
                     }}>
-                        Crafting digital
-                        <span style={{ color: t.accent, display: "block" }}>
-                            experiences that matter
+                        Crafting digital{" "}
+                        <span style={{ color: t.accent, textShadow: `0 0 50px ${t.accent}44`, position: "relative" }}>
+                            experiences
+                            <span style={{
+                                position: "absolute", bottom: -4, left: 0, right: 0, height: 3,
+                                background: `linear-gradient(90deg, ${t.accent}cc, ${t.accent}44)`,
+                                borderRadius: 2,
+                                transform: vis ? "scaleX(1)" : "scaleX(0)",
+                                transformOrigin: "left",
+                                transition: "transform 0.8s cubic-bezier(0.16,1,0.3,1) 0.3s",
+                                display: "block",
+                            }} />
                         </span>
                     </h2>
+
+                    {/* Sub */}
+                    <p style={{
+                        color: t.text2, fontSize: "clamp(13px, 1.4vw, 15px)",
+                        maxWidth: 420, margin: "0 auto", lineHeight: 1.75,
+                    }}>
+                        Flutter developer crafting clean, scalable mobile apps with Firebase &amp; REST APIs.
+                    </p>
                 </div>
 
                 {/* Profile Section - Responsive Grid */}
