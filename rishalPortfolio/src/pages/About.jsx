@@ -243,7 +243,7 @@ export default function About() {
                             flexWrap: "wrap",
                         }}>
                             <Button 
-                                href="/resume.pdf" 
+                               href="/RISHAL.pdf"
                                 download 
                                 icon={<Download size={16} />} 
                                 label="Download Resume" 
