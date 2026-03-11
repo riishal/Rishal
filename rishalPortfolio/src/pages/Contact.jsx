@@ -11,7 +11,7 @@ const WhatsAppIcon = ({ size = 14, color = "currentColor" }) => (
 
 const SOCIALS = [
     { key: "github",   Icon: Github,   label: "GitHub",   handle: "@riishal",        url: "https://github.com/riishal" },
-    { key: "linkedin", Icon: Linkedin, label: "LinkedIn", handle: "rishal-muhammed", url: "https://www.linkedin.com/in/rishal-muhammed-9bb017262" },
+    { key: "linkedin", Icon: Linkedin, label: "LinkedIn", handle: "rishal-tt", url: "https://www.linkedin.com/in/rishal-tt-9bb017262" },
     { key: "whatsapp", IconCustom: WhatsAppIcon, label: "WhatsApp", handle: "+91 7592 895 143", url: "https://wa.me/917592895143", color: "#25D366" },
 ];
 
