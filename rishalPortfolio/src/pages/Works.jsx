@@ -31,6 +31,12 @@ import gym3 from "../assets/gymApp/gym3.jpeg";
 import gym4 from "../assets/gymApp/gym4.jpeg";
 import gym5 from "../assets/gymApp/gym5.jpeg";
 import gym6 from "../assets/gymApp/gym6.jpeg";
+import gym7 from "../assets/gymApp/gym7.jpeg";
+import gym8 from "../assets/gymApp/gym8.jpeg";
+import gym9 from "../assets/gymApp/gym9.jpeg";
+import gym10 from "../assets/gymApp/gym10.jpeg";
+import gym11 from "../assets/gymApp/gym11.jpeg";
+
 import gymImg from "../assets/gymApp/gymimage.jpg";
 import bizsmartImg from "../assets/bizsmart/bizsmartimage.jpeg";
 import bizsmart1 from "../assets/bizsmart/bizsmart1.jpeg";
@@ -95,7 +101,7 @@ const PROJECTS = [
         category: "Logistics",
         desc: "End-to-end logistics platform with real-time cargo tracking, invoice booking, PDF generation, and role-based auth.",
         longDesc: "ECSO is a comprehensive logistics and courier management system for a Saudi-based company. Full shipment lifecycle — booking to delivery — with WebSocket tracking, automated PDF invoices, and role-based access for admins, branch managers, and staff.",
-        tags: ["Flutter", "Firebase", "REST API", "GetX", "JWT", "PDF Gen"],
+        tags: ["Flutter", "Dart", "REST API", "Provider", "JWT", "PDF Gen"],
         link: "https://play.google.com/store/apps/details?id=com.ebsor.ecso",
         coverImg: ecsoImg,
         screenshots: [ecso1, ecso2, ecso3, ecso4],
@@ -162,7 +168,7 @@ const PROJECTS = [
         tags: ["Flutter", "Firebase", "WhatsApp Integration", "Invoice System", "Analytics"],
         link: null,
         coverImg: gymImg,
-        screenshots: [gym1, gym2, gym3, gym4, gym5, gym6],
+        screenshots: [gym1, gym2, gym3, gym4, gym5, gym6, gym7, gym8, gym9, gym10, gym11],
         highlights: ["Customer registration with photo upload", "Membership duration tracking (1, 2, 3 months & custom)", "Expired and expiring member alerts", "Direct WhatsApp reminder & invoice sharing", "Revenue analytics dashboard", "Monthly income reporting system", "Payment status tracking (Paid / Expired)"],
     },
     {
