@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { Moon, Sun, Menu, X, Mail } from "lucide-react";
+import { Moon, Sun, Menu, X, Mail, ArrowLeft } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 
-const LINKS = ["Home", "About", "Services", "Works", "Contact"];
+const LINKS = ["Home", "About", "Services", "Experience", "Works", "Contact"];
 
 export default function Navbar() {
     const { t, toggle, isDark } = useTheme();
@@ -10,6 +11,9 @@ export default function Navbar() {
     const [active, setActive] = useState("Home");
     const [open, setOpen] = useState(false);
     const [hoveredLink, setHoveredLink] = useState(null);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const isProjectPage = location.pathname.startsWith("/project/");
 
     useEffect(() => {
         const handleScroll = () => {
@@ -36,17 +40,17 @@ export default function Navbar() {
     }, []);
 
     const scrollToSection = (id) => {
+        if (isProjectPage) {
+            navigate("/");
+            setOpen(false);
+            return;
+        }
         const element = document.getElementById(id.toLowerCase());
         if (element) {
             const offset = 80;
             const elementPosition = element.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.pageYOffset - offset;
-            
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: "smooth"
-            });
-            
+            window.scrollTo({ top: offsetPosition, behavior: "smooth" });
             setActive(id);
             setOpen(false);
         }
@@ -73,8 +77,8 @@ export default function Navbar() {
                 boxShadow: scrolled ? `0 4px 30px rgba(0, 0, 0, ${isDark ? 0.3 : 0.05})` : "none",
             }}>
                 {/* Logo with hover effect */}
-                <button 
-                    onClick={() => scrollToSection("Home")}
+                <button
+                    onClick={() => isProjectPage ? navigate("/") : scrollToSection("Home")}
                     onMouseEnter={() => setHoveredLink("logo")}
                     onMouseLeave={() => setHoveredLink(null)}
                     style={{
@@ -104,22 +108,40 @@ export default function Navbar() {
                     </span>
                 </button>
 
-                {/* Desktop Navigation */}
-                <div style={{
-                    display: "flex",
-                    gap: 8,
-                    alignItems: "center",
-                }} className="nav-links">
-                    {LINKS.map(link => (
-                        <NavLink
-                            key={link}
-                            link={link}
-                            active={active === link}
-                            t={t}
-                            onClick={() => scrollToSection(link)}
-                        />
-                    ))}
-                </div>
+                {/* Back to Portfolio — always visible on project pages (NOT inside nav-links) */}
+                {isProjectPage && (
+                    <button
+                        onClick={() => navigate("/", { state: { scrollTo: "works" } })}
+                        style={{
+                            display: "inline-flex", alignItems: "center", gap: 7,
+                            background: t.accentBg, border: `1px solid ${t.accentBorder}`,
+                            borderRadius: 10, padding: "8px 16px",
+                            color: t.accent, fontSize: 13, fontWeight: 600,
+                            cursor: "pointer", fontFamily: "'Syne', sans-serif",
+                            transition: "all 0.25s ease",
+                            whiteSpace: "nowrap",
+                        }}
+                        onMouseEnter={e => { e.currentTarget.style.background = `${t.accentBg}cc`; e.currentTarget.style.transform = "translateX(-2px)"; }}
+                        onMouseLeave={e => { e.currentTarget.style.background = t.accentBg; e.currentTarget.style.transform = "none"; }}
+                    >
+                        <ArrowLeft size={13} /> Back to Portfolio
+                    </button>
+                )}
+
+                {/* Desktop nav links — hidden on mobile, hidden on project pages */}
+                {!isProjectPage && (
+                    <div style={{ display: "flex", gap: 8, alignItems: "center" }} className="nav-links">
+                        {LINKS.map(link => (
+                            <NavLink
+                                key={link}
+                                link={link}
+                                active={active === link}
+                                t={t}
+                                onClick={() => scrollToSection(link)}
+                            />
+                        ))}
+                    </div>
+                )}
 
                 {/* Right Section */}
                 <div style={{
@@ -156,67 +178,47 @@ export default function Navbar() {
                         {isDark ? <Moon size={16} /> : <Sun size={16} />}
                     </button>
 
-                    {/* Hire Me Button - Desktop */}
-                    <button
-                        className="hire-btn"
-                        onClick={() => window.location.href = "mailto:riishaltt@gmail.com"}
-                        style={{
-                            background: t.accent,
-                            color: "#fff",
-                            border: "none",
-                            borderRadius: 8,
-                            padding: "10px 24px",
-                            fontSize: 14,
-                            fontWeight: 600,
-                            cursor: "pointer",
-                            fontFamily: "'Syne', sans-serif",
-                            letterSpacing: "0.5px",
-                            transition: "all 0.2s ease",
-                            boxShadow: `0 4px 14px ${t.accent}40`,
-                        }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.background = t.accentHover;
-                            e.currentTarget.style.transform = "translateY(-2px)";
-                            e.currentTarget.style.boxShadow = `0 6px 20px ${t.accent}60`;
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.background = t.accent;
-                            e.currentTarget.style.transform = "translateY(0)";
-                            e.currentTarget.style.boxShadow = `0 4px 14px ${t.accent}40`;
-                        }}
-                    >
-                        Hire Me
-                    </button>
+                    {/* Hire Me — hidden on project pages and on mobile */}
+                    {!isProjectPage && (
+                        <button
+                            className="hire-btn"
+                            onClick={() => window.location.href = "mailto:riishaltt@gmail.com"}
+                            style={{
+                                background: t.accent, color: "#fff", border: "none",
+                                borderRadius: 8, padding: "10px 24px", fontSize: 14,
+                                fontWeight: 600, cursor: "pointer",
+                                fontFamily: "'Syne', sans-serif", letterSpacing: "0.5px",
+                                transition: "all 0.2s ease", boxShadow: `0 4px 14px ${t.accent}40`,
+                            }}
+                            onMouseEnter={(e) => { e.currentTarget.style.background = t.accentHover; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 6px 20px ${t.accent}60`; }}
+                            onMouseLeave={(e) => { e.currentTarget.style.background = t.accent; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = `0 4px 14px ${t.accent}40`; }}
+                        >
+                            Hire Me
+                        </button>
+                    )}
 
-                    {/* Hamburger Menu */}
-                    <button
-                        className="hamburger"
-                        onClick={() => setOpen(!open)}
-                        aria-label="Toggle menu"
-                        style={{
-                            display: "none",
-                            background: "none",
-                            border: "none",
-                            cursor: "pointer",
-                            padding: 8,
-                            color: t.text,
-                            borderRadius: 8,
-                            transition: "background 0.2s ease",
-                        }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.background = t.bg3;
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.background = "none";
-                        }}
-                    >
-                        {open ? <X size={24} /> : <Menu size={24} />}
-                    </button>
+                    {/* Hamburger — only on portfolio page (mobile) */}
+                    {!isProjectPage && (
+                        <button
+                            className="hamburger"
+                            onClick={() => setOpen(!open)}
+                            aria-label="Toggle menu"
+                            style={{
+                                display: "none", background: "none", border: "none",
+                                cursor: "pointer", padding: 8, color: t.text,
+                                borderRadius: 8, transition: "background 0.2s ease",
+                            }}
+                            onMouseEnter={(e) => { e.currentTarget.style.background = t.bg3; }}
+                            onMouseLeave={(e) => { e.currentTarget.style.background = "none"; }}
+                        >
+                            {open ? <X size={24} /> : <Menu size={24} />}
+                        </button>
+                    )}
                 </div>
             </nav>
 
-            {/* Mobile Menu */}
-            <div style={{
+            {/* Mobile Menu — only on portfolio page */}
+            {!isProjectPage && <div style={{
                 position: "fixed",
                 top: scrolled ? 64 : 80,
                 left: 0,
@@ -304,7 +306,7 @@ export default function Navbar() {
                     <Mail size={18} />
                     Hire Me
                 </button>
-            </div>
+            </div>}
 
             <style>{`
                 @media (max-width: 768px) {

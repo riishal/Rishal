@@ -67,6 +67,11 @@ textarea::placeholder {
 }
 
 /* ── Keyframes ── */
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.75); }
+}
+
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -236,22 +241,6 @@ textarea::placeholder {
 ═══════════════════════════════════════════ */
 @media (max-width: 768px) {
   .about-grid {
-    flex-direction: column !important;
-    align-items: center !important;
-  }
-
-  .about-photo-col {
-    width: 100% !important;
-    max-width: 240px !important;
-  }
-
-  .about-bio-col {
-    width: 100% !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .skills-grid {
     grid-template-columns: 1fr !important;
   }
 }
