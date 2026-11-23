@@ -14,6 +14,8 @@ const EXP = [
         pts: [
             "Built ECSO Logistics App — live on Google Play Store",
             "Developed Inspec QC & production monitoring application",
+            "Engineered zpick warehouse order-picking & fulfillment system",
+            "Developed Metrix enterprise attendance & HR mobile solution",
             "Role-based access control with JWT authentication",
             "PDF invoice generation & real-time WebSocket tracking",
             "40% load time improvement via performance optimization",
@@ -27,10 +29,11 @@ const EXP = [
         current: false,
         Icon: Laptop,
         pts: [
-            "Leads Management CRM — sales pipeline & follow-up automation",
-            "Site Diary app for construction project documentation",
-            "Firebase-backed business automation solutions",
-            "CoreConnect full business management mobile application",
+            "Developed & maintained Leads App — sales pipeline & follow-up automation",
+            "Designed and built Albaik App — CRM-integrated attendance & employee management",
+            "Created CoreConnect App — product management, inventory & automated report printing",
+            "Developed Site Diary app for construction project documentation",
+            "Implemented clean architecture and Provider state management for scalable codebases",
         ],
     },
     {
@@ -132,7 +135,7 @@ export default function Experience() {
                         color: t.text2, fontSize: "clamp(13px, 1.4vw, 15px)",
                         maxWidth: 420, margin: "0 auto", lineHeight: 1.75,
                     }}>
-                        3+ years building production-grade mobile applications across multiple companies and clients.
+                        4+ years building production-grade mobile applications across multiple companies and clients.
                     </p>
                 </div>
 

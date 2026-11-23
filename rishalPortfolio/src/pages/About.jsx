@@ -5,9 +5,9 @@ import { useInView } from "../hooks/useInView";
 import aboutImg from "../assets/about.jpg";
 
 const STATS = [
-    { icon: <Briefcase size={17} />, value: "3+",   label: "Years Experience" },
-    { icon: <Award size={17} />,     value: "12+",  label: "Apps Delivered" },
-    { icon: <Code2 size={17} />,     value: "3",    label: "Live on Play Store" },
+    { icon: <Briefcase size={17} />, value: "4+",   label: "Years Experience" },
+    { icon: <Award size={17} />,     value: "16+",  label: "Apps Delivered" },
+    { icon: <Code2 size={17} />,     value: "5+",   label: "Live on Play Store" },
     { icon: <Star size={17} />,      value: "100%", label: "Client Satisfaction" },
 ];
 
@@ -192,7 +192,7 @@ export default function About() {
                             color: t.text2, fontSize: "clamp(14px, 1.6vw, 15.5px)",
                             lineHeight: 1.8, marginBottom: 18,
                         }}>
-                            With <strong style={{ color: t.text }}>3+ years of hands-on experience</strong> in Flutter development,
+                            With <strong style={{ color: t.text }}>4+ years of hands-on experience</strong> in Flutter development,
                             I specialize in building high-performance cross-platform applications that users love.
                             My approach combines clean architecture with pixel-perfect UI implementation.
                         </p>

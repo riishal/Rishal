@@ -8,9 +8,9 @@ import profileImg from "../assets/profile.jpg";
 CONSTANTS
 ───────────────────────────────────────── */
 const STATS = [
-    { value: "3+", label: "Years Exp" },
-    { value: "10+", label: "Projects" },
-    { value: "3", label: "Live Apps" },
+    { value: "4+", label: "Years Exp" },
+    { value: "16+", label: "Projects" },
+    { value: "5+", label: "Live Apps" },
     { value: "100%", label: "Satisfaction" },
 ];
 
@@ -483,7 +483,7 @@ export default function Home() {
                         }}
                     >
                         Building production-grade mobile & web apps with Flutter & Dart. 
-                        3+ years delivering enterprise solutions – real-time logistics, 
+                        4+ years delivering enterprise solutions – real-time logistics, 
                         CRM platforms – clean architecture & Firebase.
                     </motion.p>
 
@@ -597,7 +597,7 @@ export default function Home() {
                                     width: "100%",
                                     height: "100%",
                                     objectFit: "cover",
-                                    objectPosition: isMobile ? "center 5%" : "50% 20%"
+                                    objectPosition: "center center"
                                 }}
                             />
                             

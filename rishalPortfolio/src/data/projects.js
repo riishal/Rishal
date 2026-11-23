@@ -65,6 +65,33 @@ import salesmate8 from "../assets/salesmate/salesmate8.jpeg";
 import salesmate9 from "../assets/salesmate/salesmate9.jpeg";
 import salesmate10 from "../assets/salesmate/salesmate10.jpeg";
 
+// New Company Projects Assets
+import moneymentorCover from "../assets/moneyMentor/moneymentor1.png";
+import moneymentor1 from "../assets/moneyMentor/moneymentor1.png";
+import moneymentor2 from "../assets/moneyMentor/moneymentor2.png";
+
+import zpickCover from "../assets/zpick/zpick_cover.png";
+import zpick1 from "../assets/zpick/zpick1.png";
+import zpick2 from "../assets/zpick/zpick2.png";
+import zpick3 from "../assets/zpick/zpick3.png";
+import zpick4 from "../assets/zpick/zpick4.png";
+
+import metrixCover from "../assets/metrix/metrix_cover.png";
+import metrix1 from "../assets/metrix/metrix1.png";
+import metrix2 from "../assets/metrix/metrix2.png";
+
+import loyaltyCover from "../assets/loyaltyApp/kidonex_cover.png";
+
+// New Personal Projects Assets
+import noorCover from "../assets/noorHabits/noor_cover.png";
+import rentmateCover from "../assets/rentMate/rentmate_cover.png";
+import tracktrippCover from "../assets/trackTripp/tracktripp_cover.png";
+
+import aishortsCover from "../assets/aiShortsMaker/short_hook.jpg";
+import aishorts1 from "../assets/aiShortsMaker/short_01.jpg";
+import aishorts2 from "../assets/aiShortsMaker/short_02.jpg";
+import aishorts3 from "../assets/aiShortsMaker/short_03.jpg";
+
 export const STATUS_STYLES = {
     Live: { color: "#22C55E", bg: "rgba(34,197,94,0.12)", border: "rgba(34,197,94,0.30)", dot: true },
     Completed: { color: "#60A5FA", bg: "rgba(96,165,250,0.12)", border: "rgba(96,165,250,0.30)", dot: false },
@@ -75,7 +102,7 @@ export const PROJECTS = [
     {
         id: 1,
         title: "SalesMate – Smart POS & Sales Analytics",
-        company: "Personal Product",
+        company: "Personal Project",
         period: "2025 – Present",
         status: "Live",
         statusLabel: "Live · 3+ Shops",
@@ -91,7 +118,7 @@ export const PROJECTS = [
     {
         id: 2,
         title: "ECSO – Logistics",
-        company: "ESBOR Infosystems",
+        company: "EBSOR Infosystems",
         period: "May 2025 – Present",
         status: "Live",
         statusLabel: "Live",
@@ -107,7 +134,7 @@ export const PROJECTS = [
     {
         id: 3,
         title: "Inspec – QC Monitor",
-        company: "ESBOR Infosystems",
+        company: "EBSOR Infosystems",
         period: "2025",
         status: "Live",
         statusLabel: "Live",
@@ -123,7 +150,7 @@ export const PROJECTS = [
     {
         id: 4,
         title: "BizSmart – Self Ordering System",
-        company: "ESBOR Infosystems",
+        company: "EBSOR Infosystems",
         period: "2026",
         status: "Live",
         statusLabel: "Live",
@@ -199,5 +226,200 @@ export const PROJECTS = [
         coverImg: poultryShopImage,
         screenshots: [poultryShop1, poultryShop2, poultryShop3, poultryShop4, poultryShop5, poultryShop6],
         highlights: ["Voice-based sales entry (Tap to Record)", "Daily rate setting (per kg price management)", "Weight-based & amount-based sales tracking", "Pending payment tracking system", "Mark transactions as Paid", "Daily, Weekly & Monthly reports", "Total sales analytics dashboard", "Malayalam language support"],
+    },
+    {
+        id: 9,
+        title: "MoneyMentor – Personal Finance & Expense Tracker",
+        company: "EBSOR Infosystems",
+        period: "2025 – Present",
+        status: "Live",
+        statusLabel: "Live",
+        category: "Fintech / Finance",
+        desc: "Smart personal finance tracker featuring automated SMS transaction detection, multi-account management, EMI schedules, savings goals, and desktop/home widgets.",
+        longDesc: "MoneyMentor (CashMentor) is a comprehensive personal finance tracking mobile application developed to provide effortless financial clarity. It features automated SMS transaction parsing with draft review, multi-account ledger balances (Bank, Cash, Cards), debt & loan tracker with automated EMI repayment schedules, customizable savings goals with progress tracking, biometric security, and quick-entry home screen widgets.",
+        tags: ["Flutter", "Dart", "Firebase", "Cloud Firestore", "SMS Parsing", "Home Widgets", "Biometric Auth", "EMI Tracking", "Financial Analytics", "Local Notifications"],
+        link: null,
+        coverImg: moneymentorCover,
+        screenshots: [moneymentor1, moneymentor2],
+        highlights: [
+            "Automated bank SMS transaction detection & draft queue",
+            "Home screen quick-entry widget for instantaneous expense logging",
+            "Multi-account management (Bank, Cash, Wallets & Credit Cards)",
+            "Debt & loan tracker with automated EMI repayment schedules",
+            "Customizable savings goals with visual target progress bars",
+            "Biometric authentication (Fingerprint / Face ID) and secure storage",
+            "Daily expense reminders and scheduled payment notifications",
+            "Interactive category-wise spending analytics charts",
+            "Excel & cloud backup with automated synchronization",
+        ],
+    },
+    {
+        id: 10,
+        title: "zpick – Warehouse Sales-Order Picking App",
+        company: "EBSOR Infosystems",
+        period: "2025 – 2026",
+        status: "Delivered",
+        statusLabel: "Delivered",
+        category: "Supply Chain & Logistics",
+        desc: "High-performance warehouse sales-order picking app with barcode scanning, offline queue synchronization, and direct ERP integration.",
+        longDesc: "zpick is a mission-critical warehouse fulfillment and order-picking application engineered for fast-paced logistics facilities. Warehouse staff receive sales order pick documents, scan barcodes to verify correct SKU items and quantities, and record batch/bin locations. Built with Flutter, BLoC clean architecture, and an offline Hive storage queue ensuring zero operational downtime even in zero-connectivity warehouse aisles.",
+        tags: ["Flutter", "BLoC", "Clean Architecture", "Hive Offline Queue", "Barcode Scanning", "REST API", "Warehouse Logistics", "ERP Sync", "GetIt / Injectable"],
+        link: null,
+        coverImg: zpickCover,
+        screenshots: [zpick1, zpick2, zpick3, zpick4],
+        highlights: [
+            "Real-time sales order pick list dispatch & assignment",
+            "High-speed barcode scanning & SKU verification to eliminate mispicks",
+            "Offline-first architecture with Hive pending queue synchronization",
+            "Clean architecture utilizing BLoC, Freezed, and Dependency Injection",
+            "Live pick progress indicators with bin/shelf navigation assistance",
+            "Silent background synchronization with Code7 ERP backend",
+            "Optimized high-contrast interface designed for rugged handheld scanners",
+        ],
+    },
+    {
+        id: 11,
+        title: "Metrix – Code7 HR & Attendance Management",
+        company: "EBSOR Infosystems",
+        period: "2025 – 2026",
+        status: "Live",
+        statusLabel: "Live",
+        category: "HRTech / Enterprise",
+        desc: "Enterprise employee self-service app for Code7 ERP with QR check-in, biometric login, break tracking, and leave workflows.",
+        longDesc: "Metrix is the official enterprise employee self-service mobile application integrated with Code7 ERP. Employees can securely clock in and out using dynamic workplace QR code scans or biometric credentials, log breaks, monitor worked hours, request attendance punch corrections, and submit leave requests. Department managers can instantly review approvals, while staff view payroll salary slips, deductions, and announcements.",
+        tags: ["Flutter", "BLoC", "QR Scanner", "Biometric Auth", "HRTech", "Leave Management", "ERP Integration", "Employee Portal", "Secure Storage"],
+        link: null,
+        coverImg: metrixCover,
+        screenshots: [metrix1, metrix2],
+        highlights: [
+            "Fast QR code scan for workplace attendance clock-in & clock-out",
+            "Biometric authentication (Fingerprint / Face ID) and OTP login",
+            "Live work hour logging with automated break duration monitoring",
+            "Attendance history calendar with missing punch correction requests",
+            "Leave management system: apply, monitor status, and view leave balances",
+            "Direct integration with Code7 ERP payroll and deduction breakdown",
+            "Push notifications for leave approvals, company circulars, and reminders",
+        ],
+    },
+    {
+        id: 12,
+        title: "Kidonex Loyalty – Customer Rewards & Invoice Platform",
+        company: "EBSOR Infosystems",
+        period: "2025 – 2026",
+        status: "Delivered",
+        statusLabel: "Delivered",
+        category: "Retail / Customer Loyalty",
+        desc: "Modern customer loyalty application featuring dynamic QR codes, invoice submission, approval workflows, and digital rewards.",
+        longDesc: "Kidonex Loyalty is a sleek customer rewards and loyalty platform crafted for retail businesses to drive customer retention. Shoppers collect points on every purchase by presenting dynamic member QR codes or submitting invoices for admin verification. The app features personalized discount offers, tier-based member perks, real-time transaction ledgers, digital receipt generation with thermal PDF printing, and an administrative approval workflow.",
+        tags: ["Flutter", "Provider", "QR Code Engine", "Customer Loyalty", "Invoice Approvals", "Thermal PDF Printing", "Rewards System", "Push Notifications"],
+        link: null,
+        coverImg: loyaltyCover,
+        screenshots: [loyaltyCover],
+        highlights: [
+            "Dynamic customer membership QR code for counter scanning & instant point awards",
+            "Invoice photo upload with administrative approval and verification pipeline",
+            "Loyalty point accumulation, tier advancement, and redemption tracking",
+            "Exclusive promotional offers, seasonal discount coupons, and gift vouchers",
+            "Digital invoice receipts with instant PDF generation & thermal printing",
+            "Real-time notifications for point credits, approval updates, and expiring perks",
+            "Multi-store customer support with clear transaction ledger transparency",
+        ],
+    },
+    {
+        id: 13,
+        title: "Noor Habits – Habit Tracking & Personal Finance",
+        company: "Personal Project",
+        period: "2025 – 2026",
+        status: "Completed",
+        statusLabel: "Completed",
+        category: "Productivity & Lifestyle",
+        desc: "Holistic life management app combining daily habit streaks, prayer & sunnah routines, and personal debt & savings goal tracking.",
+        longDesc: "Noor Habits is a versatile lifestyle companion app built with Flutter and Supabase that unites daily routine building with personal finance management. Users build productive daily habits, track prayer routines and spiritual milestones, and visualize consistency through streak counters and completion heatmaps. Furthermore, it features a complete personal finance module for tracking credits, debits, savings targets, and financial goals with beautiful chart visualizations.",
+        tags: ["Flutter", "Riverpod", "Supabase", "Habit Tracking", "Personal Finance", "Streak Analytics", "fl_chart", "Lottie Animations", "GoRouter"],
+        link: null,
+        coverImg: noorCover,
+        screenshots: [noorCover],
+        highlights: [
+            "Customizable habit tracker with customizable frequencies, reminder times, and streaks",
+            "Detailed statistics and completion consistency heatmaps powered by fl_chart",
+            "Integrated personal finance tracker for income, expenses, and debts",
+            "Target savings goals with visual percentage completion indicators",
+            "Real-time cloud database synchronization powered by Supabase",
+            "Rewarding animations and haptic feedback on completing daily goals",
+            "Interactive calendar overview for reviewing historical progress",
+        ],
+    },
+    {
+        id: 14,
+        title: "RentMate – Rental Property & Tenant Management",
+        company: "Personal Project",
+        period: "2025 – 2026",
+        status: "Completed",
+        statusLabel: "Completed",
+        category: "PropTech / Real Estate",
+        desc: "Complete rental property manager for landlords to track rooms, tenants, rent collections, security advances, and maintenance expenses.",
+        longDesc: "RentMate is a full-featured mobile app designed for property owners and landlords to efficiently manage rental properties, rooms, and tenants. It replaces cumbersome spreadsheets with room occupancy tracking, tenant contact profiles, rent collection recording, security advance tracking, and property maintenance logs. Includes an interactive rental calendar, overdue reminders, and comprehensive monthly/yearly financial reporting.",
+        tags: ["Flutter", "Firebase", "Cloud Firestore", "Provider", "Property Management", "Tenant Tracking", "Rent Calendar", "Financial Reports", "fl_chart"],
+        link: null,
+        coverImg: rentmateCover,
+        screenshots: [rentmateCover],
+        highlights: [
+            "Room and property unit management with real-time occupancy status",
+            "Detailed tenant profiles with ID records, lease terms, and emergency contacts",
+            "Rent collection tracker with payment history and balance summaries",
+            "Security advance deposit tracking and refund management",
+            "Visual rent calendar view showing pending and collected dues",
+            "Property maintenance & utility expense logger with profit calculation",
+            "Automated overdue payment reminders via WhatsApp and notifications",
+            "Monthly & yearly income vs expense financial reports with charts",
+        ],
+    },
+    {
+        id: 15,
+        title: "TrackTripp – Group Trip Planner & Expense Splitter",
+        company: "Personal Project",
+        period: "2025 – 2026",
+        status: "Completed",
+        statusLabel: "Completed",
+        category: "Travel & Expense Sharing",
+        desc: "Group travel planner and expense splitter that automatically calculates who owes whom, settlement balances, and PDF reports.",
+        longDesc: "TrackTripp is a modern group travel management and expense-splitting mobile app built for group vacations, road trips, and friends travelling together. Trip organizers create trips, invite participants, and record expenses with flexible splitting options (equal, unequal, or custom amounts). The app features an automated debt simplification algorithm to calculate the minimal transactions required to settle balances, alongside spending analytics and PDF report export.",
+        tags: ["Flutter", "Riverpod", "Firebase", "Cloud Firestore", "Expense Splitter", "Trip Itinerary", "PDF Export", "Responsive UI", "fl_chart"],
+        link: null,
+        coverImg: tracktrippCover,
+        screenshots: [tracktrippCover],
+        highlights: [
+            "Trip planning dashboard with destination details, dates, and budget targets",
+            "Multi-member trip sharing with unique member access and invitations",
+            "Flexible expense splitting (equal split, custom amounts, specific members)",
+            "Automated debt minimization algorithm calculating minimum payments to settle up",
+            "Real-time settlement balance ledger for each individual member",
+            "Interactive spending breakdown charts by category (Food, Travel, Stay, Fuel)",
+            "One-click PDF trip expense statement generation and instant sharing",
+        ],
+    },
+    {
+        id: 16,
+        title: "AI Shorts Maker – Automated AI Video Highlight & Captions Generator",
+        company: "Personal Project",
+        period: "2026 – Present",
+        status: "Live",
+        statusLabel: "Live Prototype",
+        category: "AI & Media Engineering",
+        desc: "Automated video pipeline converting long-form video or YouTube links into viral short-form clips with AI highlight detection and animated captions.",
+        longDesc: "AI Shorts Maker is an advanced automated content generation platform that converts long-form video files or YouTube URLs into viral short-form clips. Powered by Google Gemini AI for intelligent highlight identification and OpenAI Whisper for word-accurate transcription, the engine clips 9:16 vertical video using FFmpeg and burns dynamic, animated karaoke-style captions (.ass). Includes a responsive Flutter Web dashboard for previewing and batch rendering.",
+        tags: ["Python", "FastAPI", "Flutter Web", "Google Gemini AI", "OpenAI Whisper", "FFmpeg", "yt-dlp", "ASS Subtitles", "Video Processing", "Background Tasks"],
+        link: null,
+        coverImg: aishortsCover,
+        screenshots: [aishortsCover, aishorts1, aishorts2, aishorts3],
+        highlights: [
+            "Dual input pipeline supporting both local MP4 upload and YouTube link extraction",
+            "Automated audio transcription with word-level timestamps using OpenAI Whisper",
+            "AI-powered highlight detection & viral scoring powered by Google Gemini",
+            "Automated 9:16 vertical crop, zoom framing, and audio-video synchronization",
+            "Dynamic karaoke-style highlighted captions generated via advanced ASS scripts",
+            "Asynchronous background processing with live job progress state machine",
+            "Flutter Web dashboard interface for reviewing, playing, and downloading rendered shorts",
+        ],
     },
 ];
